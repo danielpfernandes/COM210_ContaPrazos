@@ -1,0 +1,250 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    
+        android:background="@color/cinza"
+    >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="0dp"
+        android:background="@color/branco"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10px"
+            android:text="           Processo         "
+            android:textColor="@color/cinza"
+            android:textSize="24dp" />
+
+        <ImageButton
+            android:id="@+id/imageButtonSalvar"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.48"
+            android:layout_marginTop="5px"
+            android:background="@color/branco"
+            android:src="@drawable/salvar4" />
+
+    </LinearLayout>
+    
+    <ScrollView
+        android:id="@+id/cadastro_usuario"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp" >
+    
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:orientation="vertical" >
+                <TextView
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="left"
+	            android:text="Número do processo"
+	            android:textSize="18dp"
+	            />
+
+	            <EditText
+	                android:id="@+id/editnumprocesso"
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:ems="10" >
+
+	                <requestFocus />
+	            </EditText>
+	            
+	             <TextView
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="left"
+	            android:text="Vara"
+	            android:textSize="18dp" />
+	             
+					            <EditText
+	                android:id="@+id/editvara"
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:ems="10" >
+
+	                <requestFocus />	             
+	            </EditText>
+	             <TextView
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="left"
+	            android:text="Data de publicação"
+	            android:textSize="18dp" />
+	             
+	             <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:orientation="horizontal" 
+            android:id="@+id/layoutdata"
+            >
+
+	                <Button
+	                    android:id="@+id/btndata"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:text="Capturar" />
+
+	                <TextView
+	            android:id="@+id/txtdata"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="left"
+	            android:text="DD-MM-AAAA"
+	            android:textSize="18dp" />
+				    </LinearLayout>
+				    
+				
+				
+	             <TextView
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="left"
+	            android:text="Jornal"
+	            android:textSize="18dp" />
+
+	             <EditText
+	                 android:id="@+id/editjornal"
+	                 android:layout_width="match_parent"
+	                 android:layout_height="wrap_content"
+	                 android:ems="10" >
+
+	                <requestFocus />	             
+	            </EditText>
+	              <TextView
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="left"
+	            android:text="Tribunal"
+	            android:textSize="18dp" />
+
+	              <EditText
+	                  android:id="@+id/edittribunal"
+	                  android:layout_width="match_parent"
+	                  android:layout_height="wrap_content"
+	                  android:ems="10"
+	                  >
+	                  <requestFocus /></EditText>
+	             <TextView
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="left"
+	            android:text="Cidade"
+	            android:textSize="18dp" />
+
+	             <EditText
+	                 android:id="@+id/editcidade"
+	                 android:layout_width="match_parent"
+	                 android:layout_height="wrap_content"
+	                 android:ems="10"
+	                 android:inputType="phone" >
+	                  <requestFocus />
+	             </EditText>
+	             <TextView
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="left"
+	            android:text="Expediente"
+	            android:textSize="18dp" />
+
+	             <EditText
+	                 android:id="@+id/editexpediente"
+	                 android:layout_width="match_parent"
+	                 android:layout_height="wrap_content"
+	                 android:ems="10" >
+	                  <requestFocus />
+	             </EditText>
+	              <TextView
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="left"
+	            android:text="Título"
+	            android:textSize="18dp" />
+
+	              <EditText
+	                  android:id="@+id/edittitulo"
+	                  android:layout_width="match_parent"
+	                  android:layout_height="wrap_content"
+	                  android:ems="10" >
+	                  <requestFocus />
+	             </EditText>
+	             
+	               <TextView
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="left"
+	            android:text="Autor"
+	            android:textSize="18dp" />
+
+	               <EditText
+	                   android:id="@+id/editautor"
+	                   android:layout_width="match_parent"
+	                   android:layout_height="wrap_content"
+	                   android:ems="10" >
+	                  <requestFocus />
+	             </EditText>
+	               <TextView
+	                   android:layout_width="wrap_content"
+	                   android:layout_height="wrap_content"
+	                   android:layout_gravity="left"
+	                   android:text="Réu"
+	                   android:textSize="18dp" />
+
+                                        <EditText
+                                            android:id="@+id/editreu"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:ems="10" >
+	                  <requestFocus />
+	             </EditText>
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="left"
+                                            android:text="Despacho"
+                                            android:textSize="18dp" />
+
+                                        <EditText
+                                            android:id="@+id/editdespacho"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:ems="10" >
+	                  <requestFocus />
+	             </EditText>
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="left"
+                                            android:text="Advogado"
+                                            android:textSize="18dp" />
+
+                                        <EditText
+                                            android:id="@+id/editadvogado"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:ems="10" >
+	                  <requestFocus />
+	             </EditText>
+	             	              
+	             
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
