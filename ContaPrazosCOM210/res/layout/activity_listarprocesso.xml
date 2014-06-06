@@ -25,7 +25,7 @@
 		            android:layout_height="wrap_content"
 		            android:layout_marginTop="10px"
 		            android:text="          Processos       "
-		            android:textColor="@color/fundoazul"
+		            android:textColor="@color/branco"
 		            android:textSize="27dp" />
 
 		        <ImageButton

@@ -1,34 +1,21 @@
 package com.example.contaprazoscom112;
 
-import java.io.File;
-import java.io.RandomAccessFile;
 import java.util.Calendar;
-import java.util.List;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Activity_CadUsuario extends Activity{
 	public Activity activity = this;
@@ -46,8 +33,42 @@ public class Activity_CadUsuario extends Activity{
 	        Data();
 			repositorio = new Repositorio(this);
 			Salvar();
-
+			Editando();
 	    }
+	
+	public void Editando(){
+
+    	SharedPreferences sharedPreferences = getSharedPreferences("CoopFam", Activity.MODE_PRIVATE);
+
+		if(sharedPreferences.getString("EditarUsuario", "").equals("TRUE")){
+			
+			((TextView) findViewById(R.id.textoEditouCad)).setText("       Alterar usuário    ");
+			LoadPreferences();
+		}
+		
+	}
+	
+	private void LoadPreferences() {
+		
+    	SharedPreferences sharedPreferences = getSharedPreferences("CoopFam", Activity.MODE_PRIVATE);
+
+		 ((EditText) findViewById(R.id.editnome)).setText(sharedPreferences.getString("nome", ""));
+		((TextView) findViewById(R.id.txtdata)).setText(sharedPreferences.getString("datadenascimento", ""));
+		 ((EditText) findViewById(R.id.editcpf)).setText(sharedPreferences.getString("cpf", ""));
+			
+		((EditText) findViewById(R.id.editendereco)).setText(sharedPreferences.getString("endereco", ""));
+			
+	((EditText) findViewById(R.id.editcelular)).setText(sharedPreferences.getString("celular", ""));
+			
+		((EditText) findViewById(R.id.editemail)).setText(sharedPreferences.getString("email", ""));
+		
+		((EditText) findViewById(R.id.editnumoab)).setText(sharedPreferences.getString("numeroOAB", ""));
+			
+		((EditText) findViewById(R.id.editapelido)).setText(sharedPreferences.getString("apelido", ""));
+			
+		((EditText) findViewById(R.id.editsenha)).setText(sharedPreferences.getString("senha", ""));
+			
+	}
 	
 	public void Salvar(){
 		ImageButton btnSalvar = (ImageButton) findViewById(R.id.imageSalvarUsuario);
@@ -68,8 +89,7 @@ public class Activity_CadUsuario extends Activity{
 	// -----------------------------------------------------------------------------//
 		public void Data() {
 	
-			LinearLayout Dt = (LinearLayout) findViewById(R.id.layoutdata);
-	    	TextView mDateDisplay = (TextView) findViewById(R.id.txtdata);
+			TextView mDateDisplay = (TextView) findViewById(R.id.txtdata);
 	    	Button pickDate = (Button) findViewById(R.id.btndata);
 	    	
 			mDateDisplay.setText("");
@@ -164,7 +184,6 @@ public class Activity_CadUsuario extends Activity{
 			usuario.numeroOAB = numoab.getText().toString();
 			usuario.apelido  = apelido.getText().toString();
 			usuario.senha = senha.getText().toString();
-			Toast.makeText(ctx, usuario.toString(), 1).show();
 			
 			SavePreferences("cadastrado", "true");
 			SavePreferences("nome", usuario.nomeusuario);

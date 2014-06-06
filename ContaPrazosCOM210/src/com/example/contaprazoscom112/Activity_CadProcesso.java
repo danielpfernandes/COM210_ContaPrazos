@@ -101,7 +101,6 @@ public class Activity_CadProcesso extends Activity{
 			// -----------------------------------------------------------------------------//
 				public void Data() {
 			
-					LinearLayout Dt = (LinearLayout) findViewById(R.id.layoutdata);
 			    	TextView mDateDisplay = (TextView) findViewById(R.id.txtdata);
 			    	Button pickDate = (Button) findViewById(R.id.btndata);
 			    	

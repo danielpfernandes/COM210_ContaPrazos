@@ -12,13 +12,13 @@
         android:background="@color/cinza"
         android:orientation="horizontal" >
 
-		        <TextView
-		            android:layout_width="wrap_content"
-		            android:layout_height="wrap_content"
-		            android:layout_marginTop="10px"
-		            android:text="      Cadastrar processo   "
-		            android:textColor="@color/fundoazul"
-		            android:textSize="27dp" />
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="10px"
+             android:text="   Cadastrar processo"
+             android:textColor="@color/branco"
+             android:textSize="27dp" />
 
 		        <ImageButton
 		            android:id="@+id/imageSalvarProcesso"

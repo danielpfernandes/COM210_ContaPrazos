@@ -17,7 +17,7 @@
 		            android:layout_height="wrap_content"
 		            android:layout_marginTop="10px"
 		            android:text="            Login                  "
-		            android:textColor="@color/fundoazul"
+		            android:textColor="@color/branco"
 		            android:textSize="27dp" />
 
 		        <Button
@@ -26,7 +26,7 @@
 		            android:layout_height="25dp"
 		            android:layout_marginTop="5px"
 		            android:background="@drawable/button_shape"
-		            android:text="Logar"
+		            android:text="Logon"
 		            android:textColor="@color/branco" />
 
     </LinearLayout>
@@ -82,7 +82,8 @@
 	                  android:id="@+id/checkpermanecer"
 	                  android:layout_width="wrap_content"
 	                  android:layout_height="wrap_content"
-	                  android:text="Mantenha-me conectado" />
+	                  android:text=" Mantenha-me conectado"
+	                  android:button="@drawable/custom_checkbox" />
 	        
         </LinearLayout>
     </ScrollView>
