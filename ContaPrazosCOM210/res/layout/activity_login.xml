@@ -1,0 +1,90 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+	
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="0dp"
+        android:background="@color/cinza"
+        android:orientation="horizontal" >
+
+		        <TextView
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_marginTop="10px"
+		            android:text="            Login                  "
+		            android:textColor="@color/fundoazul"
+		            android:textSize="27dp" />
+
+		        <Button
+		            android:id="@+id/btnLogar"
+		            android:layout_width="50dp"
+		            android:layout_height="25dp"
+		            android:layout_marginTop="5px"
+		            android:background="@drawable/button_shape"
+		            android:text="Logar"
+		            android:textColor="@color/branco" />
+
+    </LinearLayout>
+    
+    <ScrollView
+        android:id="@+id/cadastro_usuario"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:orientation="vertical" >
+	        
+	            <TextView
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="left"
+	            android:text="Nome do usuário"
+	            android:textSize="18dp"
+	            />
+
+	            <EditText
+	                android:id="@+id/editnomelogin"
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:ems="10" >
+
+	                <requestFocus />
+	            </EditText>
+	            
+   
+
+	               
+	            
+	              <TextView
+	                  android:layout_width="wrap_content"
+	                  android:layout_height="wrap_content"
+	                  android:layout_gravity="left"
+	                  android:text="Senha"
+	                  android:textSize="18dp" />
+	              <EditText
+	                   android:id="@+id/editsenhalogin"
+	                   android:layout_width="match_parent"
+	                   android:layout_height="wrap_content"
+	                   android:ems="10" />
+
+	              <CheckBox
+	                  android:id="@+id/checkpermanecer"
+	                  android:layout_width="wrap_content"
+	                  android:layout_height="wrap_content"
+	                  android:text="Mantenha-me conectado" />
+	        
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

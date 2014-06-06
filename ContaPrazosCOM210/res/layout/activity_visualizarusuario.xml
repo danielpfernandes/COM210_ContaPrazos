@@ -1,0 +1,172 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="0dp"
+        android:background="@color/cinza"
+        android:orientation="horizontal" >
+
+		        <TextView
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_marginTop="10px"
+		            android:text="           Usuário        "
+		            android:textColor="@color/fundoazul"
+		            android:textSize="27dp" />
+
+		        <ImageButton
+		            android:id="@+id/imageSalvarUsuario"
+		            android:layout_width="70dp"
+		            android:layout_height="wrap_content"
+		            android:layout_marginTop="5px"
+		            android:layout_weight="0.48"
+		            android:background="@color/cinza"
+		            android:src="@drawable/salv" />
+
+    </LinearLayout>
+    
+    <ScrollView
+        android:id="@+id/cadastro_usuario"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:orientation="vertical" >
+	        
+	            <TextView
+	            android:id="@+id/textnome"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="left"
+	            android:text="Nome do usuário"
+	            android:textSize="18dp"
+	            />
+	                        
+	            	            <TextView
+	                  android:layout_width="wrap_content"
+	                  android:layout_height="wrap_content"
+	                  android:layout_gravity="left"
+	                  android:text=""
+	                  android:textSize="18dp" />
+
+	    <TextView
+	        android:id="@+id/textdata"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="left"
+	        android:text="Data de nascimento"
+	        android:textSize="18dp" />
+
+					<TextView
+	                  android:layout_width="wrap_content"
+	                  android:layout_height="wrap_content"
+	                  android:layout_gravity="left"
+	                  android:text=""
+	                  android:textSize="18dp" />
+	              	    
+				
+				
+	             <TextView
+	            android:id="@+id/textcpf"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="left"
+	            android:text="CPF"
+	            android:textSize="18dp" />
+<TextView
+	                  android:layout_width="wrap_content"
+	                  android:layout_height="wrap_content"
+	                  android:layout_gravity="left"
+	                  android:text=""
+	                  android:textSize="18dp" />
+	              
+	              <TextView
+	                  android:id="@+id/textendereco"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="left"
+	            android:text="Endereço"
+	            android:textSize="18dp" />
+	              <TextView
+	                  android:layout_width="wrap_content"
+	                  android:layout_height="wrap_content"
+	                  android:layout_gravity="left"
+	                  android:text=""
+	                  android:textSize="18dp" />
+	              
+	             <TextView
+	            android:id="@+id/textcelular"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="left"
+	            android:text="Celular"
+	            android:textSize="18dp" />
+	             <TextView
+	                  android:layout_width="wrap_content"
+	                  android:layout_height="wrap_content"
+	                  android:layout_gravity="left"
+	                  android:text=""
+	                  android:textSize="18dp" />
+	              
+	             <TextView
+	            android:id="@+id/textemail"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="left"
+	            android:text="E-mail"
+	            android:textSize="18dp" />
+	             <TextView
+	                  android:layout_width="wrap_content"
+	                  android:layout_height="wrap_content"
+	                  android:layout_gravity="left"
+	                  android:text=""
+	                  android:textSize="18dp" />
+	              
+	              <TextView
+	                  android:id="@+id/textnumoab"
+	                  android:layout_width="wrap_content"
+	                  android:layout_height="wrap_content"
+	                  android:layout_gravity="left"
+	                  android:text="Número do OAB"
+	                  android:textSize="18dp" />
+
+	            <TextView
+	                  android:layout_width="wrap_content"
+	                  android:layout_height="wrap_content"
+	                  android:layout_gravity="left"
+	                  android:text=""
+	                  android:textSize="18dp" />
+	                
+	               <TextView
+	                  android:id="@+id/textapelido"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="left"
+	            android:text="Apelido"
+	            android:textSize="18dp" />
+
+	               
+	            <TextView
+	                  android:layout_width="wrap_content"
+	                  android:layout_height="wrap_content"
+	                  android:layout_gravity="left"
+	                  android:text=""
+	                  android:textSize="18dp" />
+	              
+	              
+	        
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
