@@ -36,26 +36,20 @@ public class Activity_CadProcesso extends Activity{
 		Data();
 		repositorio = new Repositorio(this);
 		salvar();
-		
-		SharedPreferences sharedPreferences = getSharedPreferences("CoopFam", Activity.MODE_PRIVATE);
-		String id = sharedPreferences.getString("idprocesso", "");
-		processo = repositorio.buscarProcesso(Long.parseLong(id));
-		
+
+
 		Editando();
 	}
 
 	public void Editando(){
 
 		SharedPreferences sharedPreferences = getSharedPreferences("CoopFam", Activity.MODE_PRIVATE);
-
 		if(sharedPreferences.getString("EditarProcesso", "").equals("TRUE")){
-
+			String id = sharedPreferences.getString("idprocesso", "");
+			processo = repositorio.buscarProcesso(Long.parseLong(id));
 			((TextView) findViewById(R.id.texteditoucadproce)).setText("       Alterar processo   ");
 			LoadProcesso();
 		}
-
-
-
 	}
 
 	private void LoadProcesso() {
@@ -81,9 +75,6 @@ public class Activity_CadProcesso extends Activity{
 	//Componentes
 	public void salvar(){
 		ImageButton btnSalvar = (ImageButton) findViewById(R.id.imageSalvarProcesso);
-
-
-
 		btnSalvar.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
 				salvarnobd();
@@ -139,7 +130,7 @@ public class Activity_CadProcesso extends Activity{
 		}
 	}
 
-	
+
 	private void SavePreferences(String key, String value) {
 		SharedPreferences sharedPreferences = getSharedPreferences("CoopFam", MODE_PRIVATE);
 		SharedPreferences.Editor editor = sharedPreferences.edit();

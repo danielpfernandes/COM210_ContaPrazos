@@ -22,7 +22,6 @@ public class Activity_VisProcesso extends Activity{
 		setContentView(R.layout.activity_visualizarprocesso);
 		SharedPreferences sharedPreferences = getSharedPreferences("CoopFam", Activity.MODE_PRIVATE);
 
-
 		String id = sharedPreferences.getString("idprocesso", "");
 		processo = repositorio.buscarProcesso(Long.parseLong(id));
 
