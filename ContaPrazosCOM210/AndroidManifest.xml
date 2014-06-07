@@ -43,6 +43,10 @@
             android:name="com.example.contaprazoscom112.Activity_VisUsuario"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="com.example.contaprazoscom112.Activity_VisProcesso"
+            android:screenOrientation="portrait" >
+        </activity>
         
     </application>
 

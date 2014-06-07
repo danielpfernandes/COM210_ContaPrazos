@@ -11,19 +11,16 @@
         android:background="@color/cinza"
         android:orientation="horizontal" >
 
-		        <TextView
-		            android:layout_width="match_parent"
-		            android:layout_height="wrap_content"
-		            android:layout_marginTop="10px"
-		            android:gravity="center"
-		            android:text="Usuário"
-		            android:textColor="@color/branco"
-		            android:textSize="27dp" />
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10px"
+            android:gravity="center"
+            android:text="Processo"
+            android:textColor="@color/branco"
+            android:textSize="27dp" />
     </LinearLayout>
 
-    
-    
     <ScrollView
         android:id="@+id/cadastro_usuario"
         android:layout_width="fill_parent"
@@ -37,150 +34,134 @@
             android:layout_gravity="center_horizontal"
             android:layout_margin="10dp"
             android:orientation="vertical" >
-	        
-	            <TextView
-	            android:id="@+id/textnome"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_gravity="left"
-	            android:text="Nome do usuário"
-	            android:textSize="18dp"
-	            />
-	                        
-	            	            <TextView
-	                  android:layout_width="wrap_content"
-	                  android:layout_height="wrap_content"
-	                  android:layout_gravity="left"
-	                  android:text=""
-	                  android:textSize="18dp" />
 
-	    <TextView
-	        android:id="@+id/textdata"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_gravity="left"
-	        android:text="Data de nascimento"
-	        android:textSize="18dp" />
+            <TextView
+                android:id="@+id/textnumprocesso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Número do processo"
+                android:textSize="18dp" />
 
-					<TextView
-	                  android:layout_width="wrap_content"
-	                  android:layout_height="wrap_content"
-	                  android:layout_gravity="left"
-	                  android:text=""
-	                  android:textSize="18dp" />
-	              	    
-				
-				
-	             <TextView
-	            android:id="@+id/textcpf"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_gravity="left"
-	            android:text="CPF"
-	            android:textSize="18dp" />
-<TextView
-	                  android:layout_width="wrap_content"
-	                  android:layout_height="wrap_content"
-	                  android:layout_gravity="left"
-	                  android:text=""
-	                  android:textSize="18dp" />
-	              
-	              <TextView
-	                  android:id="@+id/textendereco"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_gravity="left"
-	            android:text="Endereço"
-	            android:textSize="18dp" />
-	              <TextView
-	                  android:layout_width="wrap_content"
-	                  android:layout_height="wrap_content"
-	                  android:layout_gravity="left"
-	                  android:text=""
-	                  android:textSize="18dp" />
-	              
-	             <TextView
-	            android:id="@+id/textcelular"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_gravity="left"
-	            android:text="Celular"
-	            android:textSize="18dp" />
-	             <TextView
-	                  android:layout_width="wrap_content"
-	                  android:layout_height="wrap_content"
-	                  android:layout_gravity="left"
-	                  android:text=""
-	                  android:textSize="18dp" />
-	              
-	             <TextView
-	            android:id="@+id/textemail"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_gravity="left"
-	            android:text="E-mail"
-	            android:textSize="18dp" />
-	              
-	              <TextView
-	                  android:id="@+id/textnumoab"
-	                  android:layout_width="wrap_content"
-	                  android:layout_height="wrap_content"
-	                  android:layout_gravity="left"
-	                  android:text="Número do OAB"
-	                  android:textSize="18dp" />
+            <TextView
+                android:id="@+id/textvara"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Vara"
+                android:textSize="18dp" />
 
-	            <TextView
-	                  android:layout_width="wrap_content"
-	                  android:layout_height="wrap_content"
-	                  android:layout_gravity="left"
-	                  android:text=""
-	                  android:textSize="18dp" />
-	                
-	               <TextView
-	                  android:id="@+id/textapelido"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_gravity="left"
-	            android:text="Apelido"
-	            android:textSize="18dp" />
+            <TextView
+                android:id="@+id/textdatapublicacao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Data de publicação"
+                android:textSize="18dp" />
 
-	               
-	            <TextView
-	                  android:layout_width="wrap_content"
-	                  android:layout_height="wrap_content"
-	                  android:layout_gravity="left"
-	                  android:text=""
-	                  android:textSize="18dp" />
+            <TextView
+                android:id="@+id/textjornal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Jornal"
+                android:textSize="18dp" />
 
-	            <LinearLayout
-	                android:layout_width="wrap_content"
-	                android:layout_height="fill_parent"
-	                android:layout_gravity="center_horizontal"
-	                android:layout_margin="10dp"
-	                android:orientation="horizontal" >
-	              
-	        <Button
-	            android:id="@+id/btnEditar"
-	            android:layout_width="90dp"
-	            android:layout_height="wrap_content"
-	            android:layout_marginEnd="10dp"
-	            android:background="@drawable/button_shape"
-	            android:text="Editar" />
-	        <TextView
-	                  android:id="@+id/textapelido"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_gravity="left"
-	            android:text="         "
-	            android:textSize="18dp" />
-	        <Button
-	            android:id="@+id/btnLogoff"
-	            android:layout_width="90dp"
-	            android:layout_height="wrap_content"	            
-	            android:text="Logoff"
-	            android:background="@drawable/button_shape" />
+            <TextView
+                android:id="@+id/texttribunal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Tribunal"
+                android:textSize="18dp" />
 
-	        </LinearLayout>
+            <TextView
+                android:id="@+id/textcidade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Cidade"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/textexpediente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Expediente"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/texttitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Título"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/textautor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Autor"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/textreu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Réu"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/textdespacho"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Despacho"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/textprazo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Prazo"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/textadvogado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Advogado"
+                android:textSize="18dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text=""
+                android:textSize="18dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/btneditarprocesso"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/button_shape"
+                    android:text="Editar" />
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

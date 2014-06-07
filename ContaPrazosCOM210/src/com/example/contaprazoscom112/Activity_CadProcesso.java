@@ -77,6 +77,7 @@ public class Activity_CadProcesso extends Activity{
 		EditText autor  = (EditText) findViewById(R.id.editautor);
 		EditText reu   = (EditText) findViewById(R.id.editreu);
 		EditText despacho   = (EditText) findViewById(R.id.editdespacho);
+		EditText prazo = (EditText) findViewById(R.id.editprazo);
 		EditText advogado  = (EditText) findViewById(R.id.editadvogado);
 		
 		processo.numprocesso = numprocesso.getText().toString(); 
@@ -90,6 +91,7 @@ public class Activity_CadProcesso extends Activity{
 		processo.autor = autor.getText().toString();  
 		processo.reu = reu.getText().toString();  
 		processo.despacho = despacho.getText().toString();  
+		processo.prazo = prazo.getText().toString();
 		processo.advogado = advogado.getText().toString();
 		
 		

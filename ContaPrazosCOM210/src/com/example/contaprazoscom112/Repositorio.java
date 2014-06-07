@@ -30,7 +30,7 @@ public class Repositorio {
 	// Cria a tabela
 	private static final String[] SCRIPT_DATABASE_CREATE = new String[] {
 		"create table Usuario( _id integer primary key autoincrement, nomeusuario text, datadenascimento text, cpf text, endereco text, celular text, email text, numeroOAB text, apelido text, senha text);", 
-		"create table Processo ( _id integer primary key autoincrement, numprocesso text, vara text, datapublicacao text, jornal text, tribunal text, cidade text, expediente text, titulo text, autor text, reu text, despacho text, advogado  text);",
+		"create table Processo ( _id integer primary key autoincrement, numprocesso text, vara text, datapublicacao text, jornal text, tribunal text, cidade text, expediente text, titulo text, autor text, reu text, despacho text, prazo text, advogado  text);",
 	}
 	;
 
@@ -104,6 +104,7 @@ public class Repositorio {
 		values.put(Processos.AUTOR, objeto.autor);
 		values.put(Processos.REU, objeto.reu);
 		values.put(Processos.DESPACHO , objeto.despacho);
+		values.put(Processos.PRAZO, objeto.prazo);
 		values.put(Processos.ADVOGADO    , objeto.advogado);
 		
 		long _id =inserirProcesso(values);
@@ -160,6 +161,7 @@ public class Repositorio {
 		values.put(Processos.AUTOR, objeto.autor);
 		values.put(Processos.REU, objeto.reu);
 		values.put(Processos.DESPACHO , objeto.despacho);
+		values.put(Processos.PRAZO, objeto.prazo);
 		values.put(Processos.ADVOGADO    , objeto.advogado);
 		
 		String _id = String.valueOf(objeto._id);
@@ -188,48 +190,36 @@ public class Repositorio {
 	//-----------------------------------------------------------------------------//
 	// BUSCAS                                                                      //
 	//-----------------------------------------------------------------------------//
-/*
-	public Usuario buscarUsuario(long _id) {
+
+	public Processo buscarProcesso(long _id) {
 		// select * from objeto where _id=?
-		Cursor c = db.query(true, NOME_TABELA_1, ObjRasProd.colunas, RasProdutos._IDRASPROD + "=" + _idrasprod, null, null, null, null, null);
+		Cursor c = db.query(true, NOME_TABELA_2, Processo.colunas, Processos._ID + "=" + _id, null, null, null, null, null);
 
 		if (c.getCount() > 0) {
 
 			// Posicinoa no primeiro elemento do cursor
 			c.moveToFirst();
 
-			ObjRasProd objeto = new ObjRasProd();
+			Processo objeto = new Processo();
 
 			// Lê os dados
-			objeto._idrasprod = c.getLong(0);
-			objeto.rasproduto = c.getString(1);
-			objeto.raspotencialhistorico = c.getString(2);
-			c.close();
-			return objeto;
-		}
-		c.close();		
-		return null;
-	}
-	*/
-	
-	
-	/*
-	public ObjProdutosComerciais buscarProd(long _id) {
-		// select * from objeto where _id=?
-		Cursor c = db.query(true, NOME_TABELA_4, ObjProdutosComerciais.colunas, Produtos._IDPROD + "=" + _id, null, null, null, null, null);
-
-		if (c.getCount() > 0) {
-
-			// Posicinoa no primeiro elemento do cursor
-			c.moveToFirst();
-
-			ObjProdutosComerciais objeto = new ObjProdutosComerciais();
-
-			// Lê os dados
-			objeto._idprod = c.getLong(0);
-			objeto._idext = c.getInt(1);
-			objeto.produto = c.getString(2);
-			objeto.potencialhistorico = c.getString(3);
+			
+			objeto._id = c.getLong(0);
+			objeto.numprocesso = c.getString(1);
+			objeto.vara = c.getString(2);
+			objeto.datapublicacao = c.getString(3);
+			objeto.jornal = c.getString(4);
+			objeto.tribunal = c.getString(5);
+			objeto.cidade = c.getString(6);
+			objeto.expediente = c.getString(7);
+			objeto.titulo = c.getString(8);
+			objeto.autor = c.getString(9);
+			objeto.reu= c.getString(10);
+			objeto.despacho= c.getString(11);
+			objeto.prazo = c.getString(12);
+			objeto.advogado= c.getString(13);
+			
+			
 			c.close();
 			return objeto;
 		}
@@ -237,7 +227,7 @@ public class Repositorio {
 		return null;
 	}
 	
-	*/
+	
 	
 	
 	//-----------------------------------------------------------------------------//
@@ -271,7 +261,8 @@ public class Repositorio {
 					objeto.autor = c.getString(9);
 					objeto.reu= c.getString(10);
 					objeto.despacho= c.getString(11);
-					objeto.advogado= c.getString(12);
+					objeto.prazo = c.getString(12);
+					objeto.advogado= c.getString(13);
 
 				} while (c.moveToNext());
 			}		
@@ -297,7 +288,7 @@ public class Repositorio {
 	
 	public void apagarProcesso(){
 		db.execSQL("DROP TABLE IF EXISTS Processo;");
-		db.execSQL("create table Processo ( _id integer primary key autoincrement, numprocesso text, vara text, taxa text, datapublicacao text, jornal text, tribunal text, cidade text, expediente text, titulo text, autor text, reu text, despacho text, advogado  text);"
+		db.execSQL("create table Processo ( _id integer primary key autoincrement, numprocesso text, vara text, taxa text, datapublicacao text, jornal text, tribunal text, cidade text, expediente text, titulo text, autor text, reu text, despacho text, prazo text, advogado  text);"
 		);
 	}
 	

@@ -17,8 +17,10 @@ import android.text.InputType;
 import android.text.format.Time;
 import android.view.Gravity;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -134,6 +136,19 @@ public class Activity_ListaProcessos extends Activity  {
 			tableRow1.addView(lin);
 			
 			tabela.addView(tableRow1);
+
+			final long id = listaproc.get(num)._id;
+	        
+			tableRow1.setOnClickListener( new OnClickListener() {
+			    @Override
+			    public void onClick( View v ) {
+					SavePreferences("idprocesso", ""+id);
+			    	Intent intent = new Intent(ctx,
+							Activity_VisProcesso.class);
+					startActivity(intent);
+			    	
+			    }
+			} );
 		}
 	}	
 	
@@ -165,5 +180,12 @@ public class Activity_ListaProcessos extends Activity  {
 		
 		}
 	});
+	}
+	
+	private void SavePreferences(String key, String value) {
+		SharedPreferences sharedPreferences = getSharedPreferences("CoopFam", MODE_PRIVATE);
+		SharedPreferences.Editor editor = sharedPreferences.edit();
+		editor.putString(key, value);
+		editor.commit();
 	}
 }

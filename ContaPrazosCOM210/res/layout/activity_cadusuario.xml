@@ -185,12 +185,13 @@
 	                  android:layout_gravity="left"
 	                  android:text="Senha"
 	                  android:textSize="18dp" />
+
 	              <EditText
-	                   android:id="@+id/editsenha"
-	                   android:layout_width="match_parent"
-	                   android:layout_height="wrap_content"
-	                   android:ems="10" />
-	              
+	                  android:id="@+id/editsenha"
+	                  android:layout_width="match_parent"
+	                  android:layout_height="wrap_content"
+	                  android:ems="10"
+	                  android:inputType="textPassword" />
 	        
         </LinearLayout>
     </ScrollView>

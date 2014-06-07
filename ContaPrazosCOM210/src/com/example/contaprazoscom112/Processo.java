@@ -4,11 +4,11 @@ import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-//_id numprocesso vara datapublicacao jornal tribunal cidade expediente titulo autor reu despacho advogado
-//_ID NUMPROCESSO VARA DATAPUBLICACAO JORNAL TRIBUNAL CIDADE EXPEDIENTE TITULO AUTOR REU DESPACHO ADVOGADO
+//_id numprocesso vara datapublicacao jornal tribunal cidade expediente titulo autor reu despacho prazo advogado
+//_ID NUMPROCESSO VARA DATAPUBLICACAO JORNAL TRIBUNAL CIDADE EXPEDIENTE TITULO AUTOR REU DESPACHO PRAZO ADVOGADO
 
 public class Processo {
-	public static String[] colunas = new String[] { Processos._ID, Processos.NUMPROCESSO, Processos.VARA, Processos.DATAPUBLICACAO, Processos.JORNAL, Processos.TRIBUNAL, Processos.CIDADE, Processos.EXPEDIENTE, Processos.TITULO, Processos.AUTOR, Processos.REU, Processos.DESPACHO, Processos.ADVOGADO};
+	public static String[] colunas = new String[] { Processos._ID, Processos.NUMPROCESSO, Processos.VARA, Processos.DATAPUBLICACAO, Processos.JORNAL, Processos.TRIBUNAL, Processos.CIDADE, Processos.EXPEDIENTE, Processos.TITULO, Processos.AUTOR, Processos.REU, Processos.DESPACHO, Processos.PRAZO, Processos.ADVOGADO};
 	
 	//Pacote do Content Provider. Precisa ser único.
 	public static final String AUTHORITY = "nome.do.pacote.provider.Processo";
@@ -26,12 +26,13 @@ public class Processo {
 	public String autor; 
 	public String reu;
 	public String despacho;
+	public String prazo;
 	public String advogado;
 	
 	public Processo() {
 	}
 
-	public Processo(String numprocesso,String vara , String  datapublicacao , String jornal, String tribunal, String cidade, String expediente, String titulo, String autor, String reu , String despacho, String advogado) 
+	public Processo(String numprocesso,String vara , String  datapublicacao , String jornal, String tribunal, String cidade, String expediente, String titulo, String autor, String reu , String despacho, String prazo, String advogado) 
 	{
 		super();
 		this.numprocesso = numprocesso;
@@ -45,10 +46,11 @@ public class Processo {
 		this.autor  = autor;
 		this.reu = reu; 
 		this.despacho = despacho; 
+		this.prazo = prazo;
 		this.advogado = advogado;
 	}
 
-	public Processo(long _id, String numprocesso,String vara , String  datapublicacao , String jornal, String tribunal, String cidade, String expediente, String titulo, String autor, String reu , String despacho, String advogado) 
+	public Processo(long _id, String numprocesso,String vara , String  datapublicacao , String jornal, String tribunal, String cidade, String expediente, String titulo, String autor, String reu , String despacho, String prazo,String advogado) 
 	{
 		super();
 		this._id = _id;
@@ -63,6 +65,7 @@ public class Processo {
 		this.autor  = autor;
 		this.reu = reu; 
 		this.despacho = despacho; 
+		this.prazo = prazo;
 		this.advogado = advogado;
 			
 	}
@@ -98,6 +101,7 @@ public class Processo {
 		public static final String AUTOR = "autor";
 		public static final String REU = "reu";
 		public static final String DESPACHO = "despacho";
+		public static final String PRAZO = "prazo";
 		public static final String ADVOGADO = "advogado";
 		
 		
