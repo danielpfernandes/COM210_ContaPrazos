@@ -4,11 +4,11 @@ import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-//_id numprocesso vara datapublicacao jornal tribunal cidade expediente titulo autor reu despacho prazo advogado
-//_ID NUMPROCESSO VARA DATAPUBLICACAO JORNAL TRIBUNAL CIDADE EXPEDIENTE TITULO AUTOR REU DESPACHO PRAZO ADVOGADO
+//_id numprocesso vara datapublicacao jornal tribunal cidade expediente titulo autor reu despacho prazo advogado destaque
+//_ID NUMPROCESSO VARA DATAPUBLICACAO JORNAL TRIBUNAL CIDADE EXPEDIENTE TITULO AUTOR REU DESPACHO PRAZO ADVOGADO DESTAQUE
 
 public class Processo {
-	public static String[] colunas = new String[] { Processos._ID, Processos.NUMPROCESSO, Processos.VARA, Processos.DATAPUBLICACAO, Processos.JORNAL, Processos.TRIBUNAL, Processos.CIDADE, Processos.EXPEDIENTE, Processos.TITULO, Processos.AUTOR, Processos.REU, Processos.DESPACHO, Processos.PRAZO, Processos.ADVOGADO};
+	public static String[] colunas = new String[] { Processos._ID, Processos.NUMPROCESSO, Processos.VARA, Processos.DATAPUBLICACAO, Processos.JORNAL, Processos.TRIBUNAL, Processos.CIDADE, Processos.EXPEDIENTE, Processos.TITULO, Processos.AUTOR, Processos.REU, Processos.DESPACHO, Processos.PRAZO, Processos.ADVOGADO, Processos.DESTAQUE};
 	
 	//Pacote do Content Provider. Precisa ser único.
 	public static final String AUTHORITY = "nome.do.pacote.provider.Processo";
@@ -28,11 +28,11 @@ public class Processo {
 	public String despacho;
 	public String prazo;
 	public String advogado;
-	
+	public String destaque;
 	public Processo() {
 	}
 
-	public Processo(String numprocesso,String vara , String  datapublicacao , String jornal, String tribunal, String cidade, String expediente, String titulo, String autor, String reu , String despacho, String prazo, String advogado) 
+	public Processo(String numprocesso,String vara , String  datapublicacao , String jornal, String tribunal, String cidade, String expediente, String titulo, String autor, String reu , String despacho, String prazo, String advogado, String destaque) 
 	{
 		super();
 		this.numprocesso = numprocesso;
@@ -48,9 +48,10 @@ public class Processo {
 		this.despacho = despacho; 
 		this.prazo = prazo;
 		this.advogado = advogado;
+		this.destaque = destaque;
 	}
 
-	public Processo(long _id, String numprocesso,String vara , String  datapublicacao , String jornal, String tribunal, String cidade, String expediente, String titulo, String autor, String reu , String despacho, String prazo,String advogado) 
+	public Processo(long _id, String numprocesso,String vara , String  datapublicacao , String jornal, String tribunal, String cidade, String expediente, String titulo, String autor, String reu , String despacho, String prazo,String advogado, String destaque) 
 	{
 		super();
 		this._id = _id;
@@ -67,6 +68,7 @@ public class Processo {
 		this.despacho = despacho; 
 		this.prazo = prazo;
 		this.advogado = advogado;
+		this.destaque = destaque;
 			
 	}
 	
@@ -103,6 +105,7 @@ public class Processo {
 		public static final String DESPACHO = "despacho";
 		public static final String PRAZO = "prazo";
 		public static final String ADVOGADO = "advogado";
+		public static final String DESTAQUE = "destaque";	
 		
 		
 		

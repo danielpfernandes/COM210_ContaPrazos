@@ -4,8 +4,6 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -16,12 +14,16 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.text.format.Time;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -37,40 +39,49 @@ public class Activity_ListaProcessos extends Activity  {
 
 
 	List<Processo> listaproc = new ArrayList<Processo>();
-	
+
 	@Override
 	public void onCreate(Bundle iciBundle) {
 		super.onCreate(iciBundle);  
+
 		Time today = new Time(Time.getCurrentTimezone());
 		today.setToNow();
 
 		mDay= today.monthDay; 
 		mMonth = today.month;              
 		mYear  = today.year; 
-		
+
 		repositorio = new Repositorio(this);
 		setContentView(R.layout.activity_listarprocesso);
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
 		CarregarTABELA();
 		AdicionarProcesso();
 		VisualizarUsuário();
 	}
-	
+
 	public void CarregarProcessos(){
-		List<Processo> ListaProcesso = repositorio.listarProcesso(String.valueOf(1));
-			for(int i=0; i<ListaProcesso.size(); i++){	
-				listaproc.add(ListaProcesso.get(i));
-			}
+		SharedPreferences sharedPreferences = getSharedPreferences("CoopFam", Activity.MODE_PRIVATE);
+		List<Processo> ListaProcesso;
+		if(sharedPreferences.getString("LISTARDESTAQUE", "").equals("TRUE")){
+			ListaProcesso = repositorio.listarProcessoDestaques(String.valueOf(1));
+		}else{
+			ListaProcesso = repositorio.listarProcesso(String.valueOf(1));
+		}
+
+		for(int i=0; i<ListaProcesso.size(); i++){	
+			listaproc.add(ListaProcesso.get(i));
+		}
 	}
 
 	public void CarregarTABELA() {
 		TableLayout tabela = (TableLayout) findViewById(R.id.tabela_processo);
 		tabela.removeAllViews();
-		TableLayout.LayoutParams tableParams = new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT);
+		TableLayout.LayoutParams tableParams = new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.FILL_PARENT);
 		TableRow.LayoutParams rowParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT,Gravity.RIGHT | Gravity.CENTER_VERTICAL);
 		tabela.setLayoutParams(tableParams);
 		CarregarProcessos();
-		
+
 		for(int num=0; num<listaproc.size(); num++){	
 			TableRow tableRow1 = new TableRow(getApplicationContext());
 			tableRow1.setLayoutParams(tableParams);
@@ -79,32 +90,32 @@ public class Activity_ListaProcessos extends Activity  {
 			LinearLayout lin0 = new LinearLayout(getApplicationContext());
 			lin0.setOrientation(LinearLayout.VERTICAL);
 			lin0.setBackgroundColor(Color.RED);
-			
+
 			TextView faltam = new TextView(getApplicationContext());
 			faltam.setText("Faltam");
 			faltam.setTextColor(Color.BLACK);
 			faltam.setTextSize(18);
 			faltam.setGravity(Gravity.CENTER);
-			
+
 			TextView qtd = new TextView(getApplicationContext());
 			qtd.setText("30");
 			qtd.setTextColor(Color.BLACK);
 			qtd.setTextSize(18);
 			qtd.setGravity(Gravity.CENTER);
-			
+
 			TextView dias = new TextView(getApplicationContext());
 			dias.setText("dias");
 			dias.setTextColor(Color.BLACK);
 			dias.setTextSize(18);
 			dias.setGravity(Gravity.CENTER);
-			
+
 			lin0.addView(faltam);
 			lin0.addView(qtd);
 			lin0.addView(dias);
-			
+
 			LinearLayout lin = new LinearLayout(getApplicationContext());
 			lin.setOrientation(LinearLayout.VERTICAL);
-			
+
 			TextView proc = new TextView(getApplicationContext());
 			proc.setText("Proc. " + listaproc.get(num).numprocesso);
 			proc.setTextColor(Color.BLACK);
@@ -131,61 +142,132 @@ public class Activity_ListaProcessos extends Activity  {
 			espaco.setTextColor(Color.BLACK);
 			espaco.setTextSize(15);	
 
+			CheckBox destaque = new CheckBox(getApplicationContext());
+			destaque.setButtonDrawable(R.drawable.custom_destaque);
+
+			TextView espaco2 = new TextView(getApplicationContext());
+			espaco2.setText("                        ");
+			espaco2.setTextColor(Color.BLACK);
+			espaco2.setTextSize(15);	
+
 			tableRow1.addView(lin0);
 			tableRow1.addView(espaco);
 			tableRow1.addView(lin);
-			
+			tableRow1.addView(espaco2);
+			tableRow1.addView(destaque);
+
+
 			tabela.addView(tableRow1);
 
 			final long id = listaproc.get(num)._id;
-	        
+
 			tableRow1.setOnClickListener( new OnClickListener() {
-			    @Override
-			    public void onClick( View v ) {
+				@Override
+				public void onClick( View v ) {
 					SavePreferences("idprocesso", ""+id);
-			    	Intent intent = new Intent(ctx,
+					Intent intent = new Intent(ctx,
 							Activity_VisProcesso.class);
 					startActivity(intent);
-			    	
-			    }
+
+				}
 			} );
+
+			if(destaque.isChecked()){
+				listaproc.get(num).destaque = "TRUE";
+				listaproc.get(num)._id = repositorio.atualizarProcesso(listaproc.get(num));
+			}
 		}
 	}	
-	
+
 	public void AdicionarProcesso(){
-		
+
 		ImageButton btnAdicionar = (ImageButton) findViewById(R.id.imageAdd);
-		
+
 		btnAdicionar.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
 
 				Intent intent = new Intent(ctx,
 						Activity_CadProcesso.class);
 				startActivity(intent);
-				
+
 			}
 		});
 	}
-	
-	
+
+
 	public void VisualizarUsuário(){
 
-	ImageButton btnUser = (ImageButton) findViewById(R.id.imageUser);
-	
-	btnUser.setOnClickListener(new Button.OnClickListener() {
-		public void onClick(View arg0) {
-			Intent intent = new Intent(ctx,
-					Activity_VisUsuario.class);
-			startActivity(intent);
-		
-		}
-	});
+		ImageButton btnUser = (ImageButton) findViewById(R.id.imageUser);
+		btnUser.setOnClickListener( new OnClickListener() {
+			@Override
+
+			public void onClick(View arg0) {
+				Intent intent = new Intent(ctx,
+						Activity_VisUsuario.class);
+				startActivity(intent);
+
+			}
+		});
 	}
-	
+
 	private void SavePreferences(String key, String value) {
 		SharedPreferences sharedPreferences = getSharedPreferences("CoopFam", MODE_PRIVATE);
 		SharedPreferences.Editor editor = sharedPreferences.edit();
 		editor.putString(key, value);
 		editor.commit();
+	}
+
+
+
+	// -----------------------------------------------------------------------------//
+	// MENU //
+	// -----------------------------------------------------------------------------//
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater menuInflater = getMenuInflater();
+		menuInflater.inflate(R.layout.menu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.menu_config:
+			Toast.makeText(ctx, "Text", 1).show();
+			return true;
+
+		case R.id.menu_dest:
+			Toast.makeText(ctx, "Text", 1).show();
+			SavePreferences("LISTARDESTAQUE", "TRUE");
+			Intent intent = new Intent(ctx,
+					Activity_ListaProcessos.class);
+
+			startActivity(intent);
+			finish();
+
+
+			return true;
+
+		case R.id.menu_proc:
+			Toast.makeText(ctx, "Text", 1).show();
+			SavePreferences("LISTARDESTAQUE", "FALSE");
+			intent = new Intent(ctx,
+					Activity_ListaProcessos.class);
+
+			startActivity(intent);
+			finish();
+
+			return true;
+
+		case R.id.menu_sobre:
+			intent = new Intent(ctx,
+					Activity_Sobre.class);
+
+			startActivity(intent);
+			finish();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 }

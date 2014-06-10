@@ -30,7 +30,7 @@ public class Repositorio {
 	// Cria a tabela
 	private static final String[] SCRIPT_DATABASE_CREATE = new String[] {
 		"create table Usuario( _id integer primary key autoincrement, nomeusuario text, datadenascimento text, cpf text, endereco text, celular text, email text, numeroOAB text, apelido text, senha text);", 
-		"create table Processo ( _id integer primary key autoincrement, numprocesso text, vara text, datapublicacao text, jornal text, tribunal text, cidade text, expediente text, titulo text, autor text, reu text, despacho text, prazo text, advogado  text);",
+		"create table Processo ( _id integer primary key autoincrement, numprocesso text, vara text, datapublicacao text, jornal text, tribunal text, cidade text, expediente text, titulo text, autor text, reu text, despacho text, prazo text, advogado  text, destaque text);",
 	}
 	;
 
@@ -68,9 +68,9 @@ public class Repositorio {
 		long _id = objeto._id;
 
 		if (_id != 0) {
-		atualizarProcesso(objeto);
+			atualizarProcesso(objeto);
 		} else {
-		_id = inserirProcesso(objeto);
+			_id = inserirProcesso(objeto);
 		}
 		return _id;
 	}
@@ -106,10 +106,11 @@ public class Repositorio {
 		values.put(Processos.DESPACHO , objeto.despacho);
 		values.put(Processos.PRAZO, objeto.prazo);
 		values.put(Processos.ADVOGADO    , objeto.advogado);
-		
+		values.put(Processos.DESTAQUE  , objeto.destaque);
+
 		long _id =inserirProcesso(values);
-		
-		
+
+
 		return _id;
 	}
 	//-----------------------------------------------------------------------------//
@@ -163,7 +164,9 @@ public class Repositorio {
 		values.put(Processos.DESPACHO , objeto.despacho);
 		values.put(Processos.PRAZO, objeto.prazo);
 		values.put(Processos.ADVOGADO    , objeto.advogado);
-		
+		values.put(Processos.DESTAQUE    , objeto.destaque);
+
+
 		String _id = String.valueOf(objeto._id);
 
 		String where = Processos._ID + "=?";
@@ -173,7 +176,7 @@ public class Repositorio {
 
 		return count;
 	}
-		//-----------------------------------------------------------------------------//
+	//-----------------------------------------------------------------------------//
 	// ATUALIZA 2                                                                  //
 	//-----------------------------------------------------------------------------//
 	public int atualizarUsuario(ContentValues valores, String where, String[] whereArgs) {
@@ -186,7 +189,7 @@ public class Repositorio {
 		Log.i(CATEGORIA, "Atualizou [" + count + "] registros");
 		return count;
 	}
-	
+
 	//-----------------------------------------------------------------------------//
 	// BUSCAS                                                                      //
 	//-----------------------------------------------------------------------------//
@@ -203,7 +206,7 @@ public class Repositorio {
 			Processo objeto = new Processo();
 
 			// Lê os dados
-			
+
 			objeto._id = c.getLong(0);
 			objeto.numprocesso = c.getString(1);
 			objeto.vara = c.getString(2);
@@ -218,18 +221,19 @@ public class Repositorio {
 			objeto.despacho= c.getString(11);
 			objeto.prazo = c.getString(12);
 			objeto.advogado= c.getString(13);
-			
-			
+			objeto.destaque = c.getString(14);
+
+
 			c.close();
 			return objeto;
 		}
 		c.close();		
 		return null;
 	}
-	
-	
-	
-	
+
+
+
+
 	//-----------------------------------------------------------------------------//
 	// LISTAS                                                                      //
 	//-----------------------------------------------------------------------------//
@@ -263,6 +267,7 @@ public class Repositorio {
 					objeto.despacho= c.getString(11);
 					objeto.prazo = c.getString(12);
 					objeto.advogado= c.getString(13);
+					objeto.destaque = c.getString(14);
 
 				} while (c.moveToNext());
 			}		
@@ -276,7 +281,52 @@ public class Repositorio {
 
 		return objetos;
 	}
+
 	
+	public List<Processo> listarProcessoDestaques(String _id) {
+		List<Processo> objetos = new ArrayList<Processo>();
+
+
+		try {
+			Cursor c = db.query(NOME_TABELA_2, Processo.colunas, Processos.DESTAQUE	 + "='TRUE'", null, null, null, null);
+
+			if (c.moveToFirst()) {
+
+				// Loop até o final
+				do {
+					Processo objeto = new Processo();
+					objetos.add(objeto);
+
+					// recupera os atributos de objeto
+					objeto._id = c.getLong(0);
+					objeto.numprocesso = c.getString(1);
+					objeto.vara = c.getString(2);
+					objeto.datapublicacao = c.getString(3);
+					objeto.jornal = c.getString(4);
+					objeto.tribunal = c.getString(5);
+					objeto.cidade = c.getString(6);
+					objeto.expediente = c.getString(7);
+					objeto.titulo = c.getString(8);
+					objeto.autor = c.getString(9);
+					objeto.reu= c.getString(10);
+					objeto.despacho= c.getString(11);
+					objeto.prazo = c.getString(12);
+					objeto.advogado= c.getString(13);
+					objeto.destaque = c.getString(14);
+
+				} while (c.moveToNext());
+			}		
+			c.close();		
+
+		} catch (SQLException e) {
+			Log.e(CATEGORIA, "Erro ao buscar o objeto: " + e.toString());
+
+			return null;
+		}	
+
+		return objetos;
+	}
+
 	//-----------------------------------------------------------------------------//
 	// FINALIZAND                                                                  //
 	//-----------------------------------------------------------------------------//
@@ -285,13 +335,13 @@ public class Repositorio {
 		db.execSQL("create table Usuario( _id integer primary key autoincrement, nomeusuario text, datadenascimento text, cpf text, endereco text, celular text, email text, numeroOAB text, apelido text, senha text);" 
 				);
 	}
-	
+
 	public void apagarProcesso(){
 		db.execSQL("DROP TABLE IF EXISTS Processo;");
-		db.execSQL("create table Processo ( _id integer primary key autoincrement, numprocesso text, vara text, taxa text, datapublicacao text, jornal text, tribunal text, cidade text, expediente text, titulo text, autor text, reu text, despacho text, prazo text, advogado  text);"
-		);
+		db.execSQL("create table Processo ( _id integer primary key autoincrement, numprocesso text, vara text, taxa text, datapublicacao text, jornal text, tribunal text, cidade text, expediente text, titulo text, autor text, reu text, despacho text, prazo text, advogado  text, destaque text);"
+				);
 	}
-	
+
 	public Cursor query(SQLiteQueryBuilder queryBuilder, String[] projection, String selection, String[] selectionArgs,
 			String groupBy, String having, String orderBy) {
 		Cursor c = queryBuilder.query(this.db, projection, selection, selectionArgs, groupBy, having, orderBy);

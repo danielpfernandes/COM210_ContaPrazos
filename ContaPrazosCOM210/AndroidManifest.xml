@@ -8,6 +8,14 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
@@ -22,24 +30,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-          <activity
+        <activity
             android:name="com.example.contaprazoscom112.Activity_CadUsuario"
             android:screenOrientation="portrait" >
         </activity>
-        
-            <activity
+        <activity
             android:name="com.example.contaprazoscom112.Activity_CadProcesso"
             android:screenOrientation="portrait" >
         </activity>
-     <activity
+        <activity
             android:name="com.example.contaprazoscom112.Activity_ListaProcessos"
             android:screenOrientation="portrait" >
         </activity>
-    <activity
+        <activity
             android:name="com.example.contaprazoscom112.Activity_Login"
             android:screenOrientation="portrait" >
         </activity>
-         <activity
+        <activity
             android:name="com.example.contaprazoscom112.Activity_VisUsuario"
             android:screenOrientation="portrait" >
         </activity>
@@ -48,6 +55,10 @@
             android:screenOrientation="portrait" >
         </activity>
         
+        <activity
+            android:name="com.example.contaprazoscom112.Activity_Sobre"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>

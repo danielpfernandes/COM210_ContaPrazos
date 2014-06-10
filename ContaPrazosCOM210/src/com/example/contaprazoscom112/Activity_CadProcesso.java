@@ -42,7 +42,6 @@ public class Activity_CadProcesso extends Activity{
 	}
 
 	public void Editando(){
-
 		SharedPreferences sharedPreferences = getSharedPreferences("CoopFam", Activity.MODE_PRIVATE);
 		if(sharedPreferences.getString("EditarProcesso", "").equals("TRUE")){
 			String id = sharedPreferences.getString("idprocesso", "");
