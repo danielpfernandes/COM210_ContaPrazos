@@ -24,6 +24,8 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -64,8 +66,10 @@ public class Activity_ListaProcessos extends Activity  {
 		SharedPreferences sharedPreferences = getSharedPreferences("CoopFam", Activity.MODE_PRIVATE);
 		List<Processo> ListaProcesso;
 		if(sharedPreferences.getString("LISTARDESTAQUE", "").equals("TRUE")){
+			((TextView) findViewById(R.id.texttituloproc)).setText("          Destaques       ");
 			ListaProcesso = repositorio.listarProcessoDestaques(String.valueOf(1));
 		}else{
+			((TextView) findViewById(R.id.texttituloproc)).setText("          Processos       ");
 			ListaProcesso = repositorio.listarProcesso(String.valueOf(1));
 		}
 
@@ -176,9 +180,14 @@ public class Activity_ListaProcessos extends Activity  {
 				listaproc.get(num).destaque = "TRUE";
 				listaproc.get(num)._id = repositorio.atualizarProcesso(listaproc.get(num));
 			}
+			if(!destaque.isChecked()){
+				listaproc.get(num).destaque = "FALSE";
+				listaproc.get(num)._id = repositorio.atualizarProcesso(listaproc.get(num));
+			}
 		}
 	}	
-
+	
+	
 	public void AdicionarProcesso(){
 
 		ImageButton btnAdicionar = (ImageButton) findViewById(R.id.imageAdd);
@@ -194,6 +203,7 @@ public class Activity_ListaProcessos extends Activity  {
 		});
 	}
 
+	
 
 	public void VisualizarUsuário(){
 
@@ -232,12 +242,9 @@ public class Activity_ListaProcessos extends Activity  {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.menu_config:
-			Toast.makeText(ctx, "Text", 1).show();
-			return true;
+
 
 		case R.id.menu_dest:
-			Toast.makeText(ctx, "Text", 1).show();
 			SavePreferences("LISTARDESTAQUE", "TRUE");
 			Intent intent = new Intent(ctx,
 					Activity_ListaProcessos.class);
@@ -249,7 +256,6 @@ public class Activity_ListaProcessos extends Activity  {
 			return true;
 
 		case R.id.menu_proc:
-			Toast.makeText(ctx, "Text", 1).show();
 			SavePreferences("LISTARDESTAQUE", "FALSE");
 			intent = new Intent(ctx,
 					Activity_ListaProcessos.class);
@@ -262,6 +268,14 @@ public class Activity_ListaProcessos extends Activity  {
 		case R.id.menu_sobre:
 			intent = new Intent(ctx,
 					Activity_Sobre.class);
+
+			startActivity(intent);
+			finish();
+			return true;
+
+		case R.id.menu_config:
+			intent = new Intent(ctx,
+					Activity_Configuracoes.class);
 
 			startActivity(intent);
 			finish();

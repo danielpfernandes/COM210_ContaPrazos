@@ -14,6 +14,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
+import android.widget.Toast;
 
 public class Repositorio {
 	// Nome da Categoria
@@ -173,7 +174,7 @@ public class Repositorio {
 		String[] whereArgs = new String[] { _id };
 
 		int count = atualizarProcesso(values, where, whereArgs);
-
+		
 		return count;
 	}
 	//-----------------------------------------------------------------------------//
@@ -223,7 +224,7 @@ public class Repositorio {
 			objeto.advogado= c.getString(13);
 			objeto.destaque = c.getString(14);
 
-
+			Log.e("ATUALIZOU PROCESSO", "te");
 			c.close();
 			return objeto;
 		}
