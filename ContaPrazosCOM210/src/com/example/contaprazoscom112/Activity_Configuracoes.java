@@ -9,7 +9,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 public class Activity_Configuracoes extends Activity{
@@ -18,7 +21,7 @@ public class Activity_Configuracoes extends Activity{
 			"3 dias", "4 dias", "5 dias", "6 dias", "7 dias"};	
 	
 	private final String[] listaCores = { "Vermelho", "Azul",
-			"Verde", "Rosa", "Roxo"};	
+			"Amarelo"};	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +39,30 @@ public class Activity_Configuracoes extends Activity{
 				R.layout.spinner_custom, listaCores);
 		corarray.setDropDownViewResource(R.layout.spinner_list_custom);
 		cor.setAdapter(corarray);
+		 SalvarConfiguracoes();
+
+	}
+	public void SalvarConfiguracoes(){
+		ImageButton btnSalvar = (ImageButton) findViewById(R.id.imageSalvarConfiguracoes);
+		btnSalvar.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View arg0) {
+				Integer icor = ((Spinner) findViewById(R.id.spinnerCor))
+						.getSelectedItemPosition();
+				SavePreferences("COR", listaCores[icor]);
+
+				Intent intent = new Intent(ctx,
+						Activity_ListaProcessos.class);
+				startActivity(intent);
+				finish();
+			}
+		});
 
 
 	}
+	
+
+	
+	
 	// -----------------------------------------------------------------------------//
 	// MENU //
 	// -----------------------------------------------------------------------------//

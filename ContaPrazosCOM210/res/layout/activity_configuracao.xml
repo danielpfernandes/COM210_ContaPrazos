@@ -20,7 +20,7 @@
 		            android:textColor="@color/branco"
 		            android:textSize="27dp" />
 		        		        <ImageButton
-		            android:id="@+id/imageSalvarUsuario"
+		            android:id="@+id/imageSalvarConfiguracoes"
 		            android:layout_width="70dp"
 		            android:layout_height="wrap_content"
 		            android:layout_marginTop="5px"

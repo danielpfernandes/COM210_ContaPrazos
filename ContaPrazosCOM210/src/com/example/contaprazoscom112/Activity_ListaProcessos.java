@@ -31,10 +31,12 @@ public class Activity_ListaProcessos extends Activity  {
 	public static Repositorio repositorio;
 	public final Context ctx = this;
 	private int mYear, mMonth, mDay;
-
+	private final String[] listacorvermelho = { "#790514", "#c10820", "#d90924", "#f3223d","#f55368","#f76c7e","#f88493","#f99da9","#fbb5be","#fcced4","#fde6e9","#fde6e9" ,"#fde6e9" ,"#fde6e9" ,"#fde6e9" ,"#fde6e9" ,"#fde6e9" ,"#fde6e9" ,"#fde6e9","#fde6e9" ,"#fde6e9" ,"#fde6e9" ,"#fde6e9" ,"#fde6e9" };
+	private final String[] listaazul = {"#02141d","#04283a","#063d58", "#085175", "#0b6693", "#23759d", "#3b84a8", "#5493b3", "#6ca3be", "#85b2c9", "#9dc1d3", "#9dc1d3" };
+	private final String[] listaamarelo = {"#d2cd0d" ,"#eae40f" ,"#eae40f" ,"#ece626" ,"#eee93e" ,"#f0ec57" ,"#f2ee6f"};
 
 	List<Processo> listaproc = new ArrayList<Processo>();
-
+	String[] listcor;
 	@Override
 	public void onCreate(Bundle iciBundle) {
 		super.onCreate(iciBundle);  
@@ -50,11 +52,27 @@ public class Activity_ListaProcessos extends Activity  {
 		repositorio = new Repositorio(this);
 		setContentView(R.layout.activity_listarprocesso);
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+		CarregarCor();
 		CarregarTABELA();
 		AdicionarProcesso();
 		VisualizarUsuário();
 	}
 
+	public void CarregarCor(){
+		SharedPreferences sharedPreferences = getSharedPreferences("CoopFam", Activity.MODE_PRIVATE);
+		String cor = sharedPreferences.getString("COR", "");
+		Toast.makeText(ctx, "COR:" + cor, 1).show();
+		listcor = listacorvermelho;
+		 if(cor.equals("Azul")){
+			listcor = listaazul;
+		}else if(cor.equals("Amarelo")){
+			listcor = listaamarelo;
+		}else{
+			listcor = listacorvermelho;
+		}
+
+	}
 	public void CarregarProcessos(){
 		SharedPreferences sharedPreferences = getSharedPreferences("CoopFam", Activity.MODE_PRIVATE);
 		List<Processo> ListaProcesso;
@@ -86,8 +104,8 @@ public class Activity_ListaProcessos extends Activity  {
 
 			LinearLayout lin0 = new LinearLayout(getApplicationContext());
 			lin0.setOrientation(LinearLayout.VERTICAL);
-			String colorteste = "#636161";
-			lin0.setBackgroundColor(Color.parseColor(colorteste));
+			String color = listcor[num];
+			lin0.setBackgroundColor(Color.parseColor(color));
 
 			TextView faltam = new TextView(getApplicationContext());
 			faltam.setText("Faltam");
@@ -313,11 +331,11 @@ public class Activity_ListaProcessos extends Activity  {
 	// -----------------------------------------------------------------------------//
 	// FINALIZANDO //
 	// -----------------------------------------------------------------------------//
-	
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		repositorio.fechar();
+		//repositorio.fechar();
 	}
 
 
