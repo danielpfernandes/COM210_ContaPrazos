@@ -119,6 +119,7 @@ public class Activity_CadProcesso extends Activity{
 		processo.despacho = despacho.getText().toString();  
 		processo.prazo = prazo.getText().toString();
 		processo.advogado = advogado.getText().toString();
+		processo.destaque = "FALSE";
 		SharedPreferences sharedPreferences = getSharedPreferences("CoopFam", Activity.MODE_PRIVATE);
 		if(sharedPreferences.getString("EditarProcesso", "").equals("TRUE")){
 

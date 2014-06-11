@@ -25,20 +25,21 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Activity_ListaProcessos extends Activity  {
 	public static Repositorio repositorio;
 	public final Context ctx = this;
 	private int mYear, mMonth, mDay;
-	
+
 
 	List<Processo> listaproc = new ArrayList<Processo>();
-	
+
 	@Override
 	public void onCreate(Bundle iciBundle) {
 		super.onCreate(iciBundle);  
-		
-		
+
+
 		Time today = new Time(Time.getCurrentTimezone());
 		today.setToNow();
 
@@ -53,7 +54,7 @@ public class Activity_ListaProcessos extends Activity  {
 		AdicionarProcesso();
 		VisualizarUsuário();
 	}
-	
+
 	public void CarregarProcessos(){
 		SharedPreferences sharedPreferences = getSharedPreferences("CoopFam", Activity.MODE_PRIVATE);
 		List<Processo> ListaProcesso;
@@ -152,6 +153,9 @@ public class Activity_ListaProcessos extends Activity  {
 			final CheckBox destaque = new CheckBox(getApplicationContext());
 			destaque.setButtonDrawable(R.drawable.custom_destaque);
 
+
+
+
 			TextView espaco2 = new TextView(getApplicationContext());
 			espaco2.setText("                        ");
 			espaco2.setTextColor(Color.BLACK);
@@ -168,6 +172,8 @@ public class Activity_ListaProcessos extends Activity  {
 
 			final long id = listaproc.get(num)._id;
 
+
+
 			tableRow1.setOnClickListener( new OnClickListener() {
 				@Override
 				public void onClick( View v ) {
@@ -178,9 +184,13 @@ public class Activity_ListaProcessos extends Activity  {
 
 				}
 			} );
-			/*final int numi = num;
+
+
+
+
+			final int numi = num;
 			destaque.setOnClickListener(new OnClickListener() {
-			
+
 				@Override
 				public void onClick(View v) {
 					if(destaque.isChecked()){
@@ -193,16 +203,15 @@ public class Activity_ListaProcessos extends Activity  {
 					}
 
 				}
+
+
 			});
-			
-			if(listaproc.get(numi).destaque.equals("TRUE")){
-				destaque.setChecked(true);
-			}else{
-				destaque.setChecked(false);
-			}*/
-		
+
+
+
+
 		}
-		
+
 	}	
 
 
@@ -300,4 +309,16 @@ public class Activity_ListaProcessos extends Activity  {
 			return super.onOptionsItemSelected(item);
 		}
 	}
+
+	// -----------------------------------------------------------------------------//
+	// FINALIZANDO //
+	// -----------------------------------------------------------------------------//
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		repositorio.fechar();
+	}
+
+
 }
