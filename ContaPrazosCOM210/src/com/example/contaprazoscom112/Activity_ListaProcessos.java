@@ -1,7 +1,6 @@
 package com.example.contaprazoscom112;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.List;
 import android.app.Activity;
@@ -11,7 +10,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.InputType;
 import android.text.format.Time;
 import android.view.Gravity;
 import android.view.Menu;
@@ -20,32 +18,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Activity_ListaProcessos extends Activity  {
 	public static Repositorio repositorio;
 	public final Context ctx = this;
 	private int mYear, mMonth, mDay;
-
+	
 
 	List<Processo> listaproc = new ArrayList<Processo>();
-
+	
 	@Override
 	public void onCreate(Bundle iciBundle) {
 		super.onCreate(iciBundle);  
-
+		
+		
 		Time today = new Time(Time.getCurrentTimezone());
 		today.setToNow();
 
@@ -56,12 +49,11 @@ public class Activity_ListaProcessos extends Activity  {
 		repositorio = new Repositorio(this);
 		setContentView(R.layout.activity_listarprocesso);
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
 		CarregarTABELA();
 		AdicionarProcesso();
 		VisualizarUsuário();
 	}
-
+	
 	public void CarregarProcessos(){
 		SharedPreferences sharedPreferences = getSharedPreferences("CoopFam", Activity.MODE_PRIVATE);
 		List<Processo> ListaProcesso;
@@ -93,7 +85,8 @@ public class Activity_ListaProcessos extends Activity  {
 
 			LinearLayout lin0 = new LinearLayout(getApplicationContext());
 			lin0.setOrientation(LinearLayout.VERTICAL);
-			lin0.setBackgroundColor(Color.RED);
+			String colorteste = "#636161";
+			lin0.setBackgroundColor(Color.parseColor(colorteste));
 
 			TextView faltam = new TextView(getApplicationContext());
 			faltam.setText("Faltam");
@@ -101,8 +94,18 @@ public class Activity_ListaProcessos extends Activity  {
 			faltam.setTextSize(18);
 			faltam.setGravity(Gravity.CENTER);
 
+
+			int prazo = Integer.parseInt(listaproc.get(num).prazo);
+
+			int index = listaproc.get(num).datapublicacao.indexOf("/");
+			int pdias = Integer.parseInt(listaproc.get(num).datapublicacao.substring(0, index));
+
+			int qtddias = (pdias-mDay)+prazo;
+
+
 			TextView qtd = new TextView(getApplicationContext());
-			qtd.setText("30");
+			qtd.setText(String.valueOf(qtddias));
+
 			qtd.setTextColor(Color.BLACK);
 			qtd.setTextSize(18);
 			qtd.setGravity(Gravity.CENTER);
@@ -146,7 +149,7 @@ public class Activity_ListaProcessos extends Activity  {
 			espaco.setTextColor(Color.BLACK);
 			espaco.setTextSize(15);	
 
-			CheckBox destaque = new CheckBox(getApplicationContext());
+			final CheckBox destaque = new CheckBox(getApplicationContext());
 			destaque.setButtonDrawable(R.drawable.custom_destaque);
 
 			TextView espaco2 = new TextView(getApplicationContext());
@@ -175,19 +178,34 @@ public class Activity_ListaProcessos extends Activity  {
 
 				}
 			} );
+			/*final int numi = num;
+			destaque.setOnClickListener(new OnClickListener() {
+			
+				@Override
+				public void onClick(View v) {
+					if(destaque.isChecked()){
+						listaproc.get(numi).destaque = "TRUE";
+						listaproc.get(numi)._id = repositorio.atualizarProcesso(listaproc.get(numi));
+					}
+					if(!destaque.isChecked()){
+						listaproc.get(numi).destaque = "FALSE";
+						listaproc.get(numi)._id = repositorio.atualizarProcesso(listaproc.get(numi));
+					}
 
-			if(destaque.isChecked()){
-				listaproc.get(num).destaque = "TRUE";
-				listaproc.get(num)._id = repositorio.atualizarProcesso(listaproc.get(num));
-			}
-			if(!destaque.isChecked()){
-				listaproc.get(num).destaque = "FALSE";
-				listaproc.get(num)._id = repositorio.atualizarProcesso(listaproc.get(num));
-			}
+				}
+			});
+			
+			if(listaproc.get(numi).destaque.equals("TRUE")){
+				destaque.setChecked(true);
+			}else{
+				destaque.setChecked(false);
+			}*/
+		
 		}
+		
 	}	
-	
-	
+
+
 	public void AdicionarProcesso(){
 
 		ImageButton btnAdicionar = (ImageButton) findViewById(R.id.imageAdd);
@@ -202,8 +220,6 @@ public class Activity_ListaProcessos extends Activity  {
 			}
 		});
 	}
-
-	
 
 	public void VisualizarUsuário(){
 

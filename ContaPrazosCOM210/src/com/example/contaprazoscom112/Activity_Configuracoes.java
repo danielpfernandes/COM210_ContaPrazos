@@ -15,7 +15,7 @@ import android.widget.Spinner;
 public class Activity_Configuracoes extends Activity{
 	public final Context ctx = this;
 	private final String[] listadias = { "1 dia", "2 dias",
-			"3 dias", "4 dias", "6 dias", "6 dias", "7 dias"};	
+			"3 dias", "4 dias", "5 dias", "6 dias", "7 dias"};	
 	
 	private final String[] listaCores = { "Vermelho", "Azul",
 			"Verde", "Rosa", "Roxo"};	
@@ -35,7 +35,7 @@ public class Activity_Configuracoes extends Activity{
 		ArrayAdapter<String> corarray = new ArrayAdapter<String>(this,
 				R.layout.spinner_custom, listaCores);
 		corarray.setDropDownViewResource(R.layout.spinner_list_custom);
-		cor.setAdapter(tempoarray);
+		cor.setAdapter(corarray);
 
 
 	}

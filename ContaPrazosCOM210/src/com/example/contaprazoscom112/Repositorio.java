@@ -243,8 +243,8 @@ public class Repositorio {
 
 
 		try {
-			// Idem a: SELECT _id,atributo1,atributo2,atributo3 from OBJETO where nome = ?
-			Cursor c = db.query(NOME_TABELA_2, Processo.colunas, null, null, null, null, null);
+			
+			Cursor c = db.query(NOME_TABELA_2, Processo.colunas, null, null, null, null, Processos.PRAZO);
 
 			if (c.moveToFirst()) {
 
