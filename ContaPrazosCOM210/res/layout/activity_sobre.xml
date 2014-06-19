@@ -1,0 +1,90 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+	
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="0dp"
+        android:background="@color/cinza"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10px"
+            android:gravity="center"
+            android:text="Sobre"
+            android:textColor="@color/branco"
+            android:textSize="27dp" />
+
+    </LinearLayout>
+    
+    <ScrollView
+        android:id="@+id/cadastro_usuario"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:orientation="vertical" >
+	        
+              <TextView
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_gravity="center"
+	                android:gravity="center"
+	                android:text=""
+	                android:textSize="24dp" />
+              
+              <TextView
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_gravity="center"
+	                android:gravity="center"
+	                android:text="Trabalho Final"
+	                android:textSize="28dp" />
+              <TextView
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_gravity="center"
+	                android:gravity="center"
+	                android:text=""
+	                android:textSize="26dp" />
+		      
+              <TextView
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_gravity="center"
+	                android:gravity="center"
+	                android:text="Eng. de Software COM210"
+	                android:textSize="20dp" />
+	          
+              <TextView
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_gravity="center"
+	                android:gravity="center"
+	                android:text=""
+	                android:textSize="26dp" />
+              
+              <TextView
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_gravity="center"
+	                android:gravity="center"
+	                android:text="Yasmin Bacha Castro\nAna Clara Guatura\nAnna Bia Dias\nDaniel Paiva Fernandes\nJoão Paulo P. Shibata\nLarissa Maria O. Almeida\nRoberta Vilela\n"
+	                android:textSize="18dp" />
+		        
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
