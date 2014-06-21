@@ -76,6 +76,7 @@ public class Activity_CadProcesso extends Activity{
 		ImageButton btnSalvar = (ImageButton) findViewById(R.id.imageSalvarProcesso);
 		btnSalvar.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
+				validarDados();
 				salvarnobd();
 				SavePreferences("EditarProcesso", "FALSE");
 				Intent intent = new Intent(ctx,
@@ -85,7 +86,12 @@ public class Activity_CadProcesso extends Activity{
 			}
 		});
 	}
+	//Validando dados = prazo não permite null
+	public void validarDados(){
 
+
+
+	}
 
 	// -----------------------------------------------------------------------------//
 	// SALVAR - BANCO DE DADOS //
