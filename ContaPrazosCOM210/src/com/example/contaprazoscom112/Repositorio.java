@@ -224,7 +224,6 @@ public class Repositorio {
 			objeto.advogado= c.getString(13);
 			objeto.destaque = c.getString(14);
 
-			Log.e("ATUALIZOU PROCESSO", "te");
 			c.close();
 			return objeto;
 		}
