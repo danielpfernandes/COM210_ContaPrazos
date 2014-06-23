@@ -2,10 +2,6 @@ package com.example.contaprazoscom112;
 
 import java.util.Calendar;
 
-<<<<<<< HEAD
-import com.example.contaprazoscom112.R;
-=======
->>>>>>> origin/bugtest+yasmin
 
 import android.app.Activity;
 import android.app.AlertDialog;

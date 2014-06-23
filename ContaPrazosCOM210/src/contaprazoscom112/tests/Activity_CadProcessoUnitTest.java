@@ -1,15 +1,16 @@
 package contaprazoscom112.tests;
 
-import com.example.contaprazoscom112.Activity_Configuracoes;
-import com.example.contaprazoscom112.R;
-
 import android.content.Intent;
 import android.test.ActivityUnitTestCase;
 import android.widget.Button;
 
-public class Activity_ConfiguracoesUnitTest extends ActivityUnitTestCase<Activity_Configuracoes>{
-	public Activity_ConfiguracoesUnitTest() {
-		super(Activity_Configuracoes.class);
+import com.example.contaprazoscom112.Activity_CadProcesso;
+import com.example.contaprazoscom112.Activity_Configuracoes;
+import com.example.contaprazoscom112.R;
+
+public class Activity_CadProcessoUnitTest extends ActivityUnitTestCase<Activity_CadProcesso>{
+	public Activity_CadProcessoUnitTest() {
+		super(Activity_CadProcesso.class);
 	}
 	
 	@Override
@@ -22,7 +23,6 @@ public class Activity_ConfiguracoesUnitTest extends ActivityUnitTestCase<Activit
 		
 		final Intent launchIntent = getStartedActivityIntent();
 		assertNotNull("Intent não foi null", launchIntent);
-		assertTrue(isFinishCalled());		
-		
-	}	
+		assertTrue(isFinishCalled());	
+	}
 }
