@@ -23,7 +23,7 @@
         android:label="Conta Prazos"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.contaprazoscom210.Splash"
+            android:name="com.example.contaprazoscom112.Splash"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,38 +32,38 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.contaprazoscom210.Activity_CadUsuario"
+            android:name="com.example.contaprazoscom112.Activity_CadUsuario"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.example.contaprazoscom210.Activity_CadProcesso"
+            android:name="com.example.contaprazoscom112.Activity_CadProcesso"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.example.contaprazoscom210.Activity_ListaProcessos"
+            android:name="com.example.contaprazoscom112.Activity_ListaProcessos"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.example.contaprazoscom210.Activity_Login"
+            android:name="com.example.contaprazoscom112.Activity_Login"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.example.contaprazoscom210.Activity_VisUsuario"
+            android:name="com.example.contaprazoscom112.Activity_VisUsuario"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.example.contaprazoscom210.Activity_VisProcesso"
-            android:screenOrientation="portrait" >
-        </activity>
-        
-        <activity
-            android:name="com.example.contaprazoscom210.Activity_Sobre"
+            android:name="com.example.contaprazoscom112.Activity_VisProcesso"
             android:screenOrientation="portrait" >
         </activity>
         
+        <activity
+            android:name="com.example.contaprazoscom112.Activity_Sobre"
+            android:screenOrientation="portrait" >
+        </activity>
+        
         
         <activity
-            android:name="com.example.contaprazoscom210.Activity_Configuracoes"
+            android:name="com.example.contaprazoscom112.Activity_Configuracoes"
             android:screenOrientation="portrait" >
         </activity>
         <uses-library android:name="android.test.runner" />
