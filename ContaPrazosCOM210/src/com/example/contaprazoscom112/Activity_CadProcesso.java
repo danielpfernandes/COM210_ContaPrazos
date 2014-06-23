@@ -2,12 +2,17 @@ package com.example.contaprazoscom112;
 
 import java.util.Calendar;
 
+<<<<<<< HEAD
 import com.example.contaprazoscom112.R;
+=======
+>>>>>>> origin/bugtest+yasmin
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -78,16 +83,37 @@ public class Activity_CadProcesso extends Activity{
 		ImageButton btnSalvar = (ImageButton) findViewById(R.id.imageSalvarProcesso);
 		btnSalvar.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
-				salvarnobd();
-				SavePreferences("EditarProcesso", "FALSE");
-				Intent intent = new Intent(ctx,
-						Activity_ListaProcessos.class);
-				startActivity(intent);
-				finish();
+				validarDados();
+
 			}
 		});
 	}
+	//Validando dados = prazo não permite null
+	public void validarDados(){
+		EditText prazoedit = (EditText) findViewById(R.id.editprazo);
+		if(prazoedit.getText().toString().equals("") || prazoedit.getText().toString()  == null){
 
+			AlertDialog.Builder alertaprop = new AlertDialog.Builder(ctx);
+			alertaprop.setTitle("Campos obrigatório vazio.");
+			alertaprop.setMessage("Campos vazios");
+			alertaprop.setPositiveButton("OK", new DialogInterface.OnClickListener() {					
+				public void onClick(DialogInterface dialog, int which) {
+				}
+			});
+			alertaprop.show();
+
+		}else{
+			salvarnobd();
+			SavePreferences("EditarProcesso", "FALSE");
+			Intent intent = new Intent(ctx,
+					Activity_ListaProcessos.class);
+			startActivity(intent);
+			finish();
+
+		}
+
+
+	}
 
 	// -----------------------------------------------------------------------------//
 	// SALVAR - BANCO DE DADOS //
