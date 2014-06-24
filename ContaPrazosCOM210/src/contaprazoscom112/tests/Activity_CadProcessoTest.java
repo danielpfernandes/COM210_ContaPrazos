@@ -1,6 +1,7 @@
 package contaprazoscom112.tests;
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.contaprazoscom112.Activity_CadProcesso;
@@ -10,7 +11,7 @@ public class Activity_CadProcessoTest extends ActivityInstrumentationTestCase2<A
 
 				
 	private Activity_CadProcesso mActivity_CadProcesso;
-	private TextView mFirstTestText;
+	private EditText mFirstTestText;
 	
 	public Activity_CadProcessoTest() {
 		super(Activity_CadProcesso.class);
@@ -20,12 +21,12 @@ public class Activity_CadProcessoTest extends ActivityInstrumentationTestCase2<A
 	protected void setUp() throws Exception {
 		super.setUp();
 			mActivity_CadProcesso = getActivity();
-			mFirstTestText = (TextView) mActivity_CadProcesso.findViewById(R.id.textView1);
+			mFirstTestText = (EditText) mActivity_CadProcesso.findViewById(R.id.editnome);
 	}
 	
-	public void testActivity_Configuracoes_labelText() {
+	public void testActivity_CadProcesso_labelText() {
 		final String expected =
-				mActivity_CadProcesso.getString(R.string.hello_world);
+				mActivity_CadProcesso.getString(R.id.textnome);
 		final String actual = mFirstTestText.getText().toString();
 		assertEquals(expected, actual);
 	}

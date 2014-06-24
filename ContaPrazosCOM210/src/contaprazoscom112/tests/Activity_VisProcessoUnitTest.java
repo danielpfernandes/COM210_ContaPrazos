@@ -15,7 +15,7 @@ public class Activity_VisProcessoUnitTest extends ActivityUnitTestCase<Activity_
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		Intent mLaunchIntent = new Intent (getInstrumentation().getTargetContext(), Activity_CadUsuario.class);
+		Intent mLaunchIntent = new Intent (getInstrumentation().getTargetContext(), Activity_VisProcesso.class);
 		startActivity(mLaunchIntent, null, null);
 		final Button botaoEditar = (Button) getActivity().findViewById(R.id.btnEditar);
 		botaoEditar.performClick();
