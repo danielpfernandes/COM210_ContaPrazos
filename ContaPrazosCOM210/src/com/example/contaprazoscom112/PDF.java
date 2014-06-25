@@ -36,7 +36,7 @@ public class PDF  extends Activity {
     protected void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listarprocesso);
+        setContentView(R.layout.activity_pdf.xml);
         
         //activity_main foi trocado por activity_listarprocesso
          
