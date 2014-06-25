@@ -209,7 +209,7 @@ public class Activity_ListaProcessos extends Activity  {
 			} );
 
 
-
+//FUNÇÃO DE DESLIZAR
 
 			final int numi = num;
 			destaque.setOnClickListener(new OnClickListener() {
