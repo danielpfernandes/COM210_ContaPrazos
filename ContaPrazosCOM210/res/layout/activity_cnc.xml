@@ -1,0 +1,73 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="0dp"
+        android:background="@color/cinza"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/imageUser"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5px"
+            android:layout_weight="0.48"
+            android:background="@color/cinza"
+            android:src="@drawable/user" />
+
+        <TextView
+            android:id="@+id/texttituloproc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10px"
+            android:text="          Touch       "
+            android:textColor="@color/branco"
+            android:textSize="27dp" />
+
+        <ImageButton
+            android:id="@+id/imageAdd"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5px"
+            android:layout_weight="0.48"
+            android:background="@color/cinza"
+            android:src="@drawable/add" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/cadastro_scrl"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp" >
+
+        <LinearLayout
+            android:id="@+id/layoutlinear"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="0dp"
+            android:orientation="horizontal" >
+
+            <TableLayout
+                android:id="@+id/tabela_processo"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_horizontal" >
+            </TableLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text=""
+                android:textSize="20dp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
