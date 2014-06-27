@@ -36,11 +36,11 @@ public class PDF  extends Activity {
     protected void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pdf.xml);
+        setContentView(R.layout.activity_pdf);
         
         //activity_main foi trocado por activity_listarprocesso
          
-        b= (Button)findViewById(R.id.button1);        
+        b= (Button)findViewById(R.id.btngerarpdf);        
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,7 +93,7 @@ public class PDF  extends Activity {
                  doc.add(p2);
                   
                  ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                 Bitmap bitmap = BitmapFactory.decodeResource(getBaseContext().getResources(), R.drawable.android);
+                 Bitmap bitmap = BitmapFactory.decodeResource(getBaseContext().getResources(), R.drawable.and);
                  bitmap.compress(Bitmap.CompressFormat.JPEG, 100 , stream);
                  Image myImg = Image.getInstance(stream.toByteArray());
                  myImg.setAlignment(Image.MIDDLE);
