@@ -1,33 +1,39 @@
 package com.example.contaprazoscom112;
-
-
 import java.util.ArrayList;
 import java.util.List;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.format.Time;
-import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.text.format.Time;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.GestureDetector.OnGestureListener;
+import android.view.View.OnClickListener;
+import android.view.GestureDetector;
 import android.widget.TextView;
-import android.widget.Toast;
+import android.graphics.Color;
+import android.graphics.Typeface;
 
-public class Activity_ListaProcessos extends Activity  {
+public class Activity_cnc extends Activity implements OnGestureListener{    
+    private LinearLayout main;    
+    private TextView viewA;
+   
+    private GestureDetector gestureScanner;
+   
+    //------------
 	public static Repositorio repositorio;
 	public final Context ctx = this;
 	private int mYear, mMonth, mDay;
@@ -37,11 +43,16 @@ public class Activity_ListaProcessos extends Activity  {
 
 	List<Processo> listaproc = new ArrayList<Processo>();
 	String[] listcor;
-	@Override
-	public void onCreate(Bundle iciBundle) {
-		super.onCreate(iciBundle);  
 
-
+    
+    
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+		
+//----------
+        
 		Time today = new Time(Time.getCurrentTimezone());
 		today.setToNow();
 
@@ -50,14 +61,74 @@ public class Activity_ListaProcessos extends Activity  {
 		mYear  = today.year; 
 
 		repositorio = new Repositorio(this);
-		setContentView(R.layout.activity_listarprocesso);
-		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-		CarregarCor();
+        ///------------
+		
+        setContentView(R.layout.activity_cnc);
+        
+        gestureScanner = new GestureDetector(this);
+        main = (LinearLayout) findViewById(R.id.layoutlinear);  
+        
+        viewA = (TextView) findViewById(R.id.texttituloproc);
+        
+          //---------
+        CarregarCor();
 		CarregarTABELA();
 		AdicionarProcesso();
 		VisualizarUsuário();
-	}
+        
+    }
+   
+    @Override
+    public boolean onTouchEvent(MotionEvent me) {
+        return gestureScanner.onTouchEvent(me);
+    }
+   
+    @Override
+    public boolean onDown(MotionEvent e) {
+        return true;
+    }
+   
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        if (Math.abs(e1.getY() - e2.getY()) > 250) {
+            
+        	 viewA.setText("dir esq" + "-");           
+        	return false;
+         }
+
+         // Movimento da direita para esquerda
+         if (e1.getX() - e2.getX() > 100 && Math.abs(velocityX) > 200) {
+        	 viewA.setText("dir esq - Y: " +e1.getY()+ "-");
+             
+
+         } else if (e2.getX() - e1.getX() > 100 && Math.abs(velocityX) > 200) {
+        	 viewA.setText("esq dir- Y: " +e1.getY() + "-");
+         }
+        return true;
+    }
+   
+    @Override
+    public void onLongPress(MotionEvent e) {
+    }
+   
+    @Override
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+        
+        return true;
+    }
+   
+    @Override
+    public void onShowPress(MotionEvent e) {
+        
+    }    
+   
+    @Override
+    public boolean onSingleTapUp(MotionEvent e) {
+        return true;
+    }
+
+////---------------
 
 	public void CarregarCor(){
 		SharedPreferences sharedPreferences = getSharedPreferences("CoopFam", Activity.MODE_PRIVATE);
@@ -79,7 +150,7 @@ public class Activity_ListaProcessos extends Activity  {
 			((TextView) findViewById(R.id.texttituloproc)).setText("          Destaques       ");
 			ListaProcesso = repositorio.listarProcessoDestaques(String.valueOf(1));
 		}else{
-			((TextView) findViewById(R.id.texttituloproc)).setText("          Processos       ");
+			((TextView) findViewById(R.id.texttituloproc)).setText("          Toast       ");
 			ListaProcesso = repositorio.listarProcesso(String.valueOf(1));
 		}
 
@@ -275,82 +346,82 @@ public class Activity_ListaProcessos extends Activity  {
 		editor.commit();
 	}
 
-
-
 	// -----------------------------------------------------------------------------//
-	// MENU //
-	// -----------------------------------------------------------------------------//
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater menuInflater = getMenuInflater();
-		menuInflater.inflate(R.layout.menu, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-
-
-		case R.id.menu_dest:
-			SavePreferences("LISTARDESTAQUE", "TRUE");
-			Intent intent = new Intent(ctx,
-					Activity_ListaProcessos.class);
-
-			startActivity(intent);
-			finish();
-
-
+		// MENU //
+		// -----------------------------------------------------------------------------//
+		@Override
+		public boolean onCreateOptionsMenu(Menu menu) {
+			MenuInflater menuInflater = getMenuInflater();
+			menuInflater.inflate(R.layout.menu, menu);
 			return true;
-
-		case R.id.menu_proc:
-			SavePreferences("LISTARDESTAQUE", "FALSE");
-			intent = new Intent(ctx,
-					Activity_ListaProcessos.class);
-
-			startActivity(intent);
-			finish();
-
-			return true;
-
-		case R.id.menu_sobre:
-			intent = new Intent(ctx,
-					Activity_Sobre.class);
-			startActivity(intent);
-			finish();
-			return true;
-
-		case R.id.menu_config:
-			intent = new Intent(ctx,
-					Activity_Configuracoes.class);
-
-			startActivity(intent);
-			finish();
-			return true;
-		//Trecho que fizemos - OBS ANNA
-		case R.id.menu_acaodotouch:
-			intent = new Intent(ctx,
-					Activity_cnc.class);
-
-			startActivity(intent);
-			finish();
-			return true;
-//END
-		
-		default:
-			return super.onOptionsItemSelected(item);
 		}
-	}
 
-	// -----------------------------------------------------------------------------//
-	// FINALIZANDO //
-	// -----------------------------------------------------------------------------//
-
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		//repositorio.fechar();
-	}
+		@Override
+		public boolean onOptionsItemSelected(MenuItem item) {
+			switch (item.getItemId()) {
 
 
-}
+			case R.id.menu_dest:
+				SavePreferences("LISTARDESTAQUE", "TRUE");
+				Intent intent = new Intent(ctx,
+						Activity_ListaProcessos.class);
+
+				startActivity(intent);
+				finish();
+
+
+				return true;
+
+			case R.id.menu_proc:
+				SavePreferences("LISTARDESTAQUE", "FALSE");
+				intent = new Intent(ctx,
+						Activity_ListaProcessos.class);
+
+				startActivity(intent);
+				finish();
+
+				return true;
+
+			case R.id.menu_sobre:
+				intent = new Intent(ctx,
+						Activity_Sobre.class);
+				startActivity(intent);
+				finish();
+				return true;
+
+			case R.id.menu_config:
+				intent = new Intent(ctx,
+						Activity_Configuracoes.class);
+
+				startActivity(intent);
+				finish();
+				return true;
+			//Trecho que fizemos - OBS ANNA
+			case R.id.menu_acaodotouch:
+				intent = new Intent(ctx,
+						Activity_cnc.class);
+
+				startActivity(intent);
+				finish();
+				return true;
+	//END
+			
+			default:
+				return super.onOptionsItemSelected(item);
+			}
+		}
+
+		// -----------------------------------------------------------------------------//
+		// FINALIZANDO //
+		// -----------------------------------------------------------------------------//
+
+		@Override
+		protected void onDestroy() {
+			super.onDestroy();
+			//repositorio.fechar();
+		}
+
+    
+
+
+} 
