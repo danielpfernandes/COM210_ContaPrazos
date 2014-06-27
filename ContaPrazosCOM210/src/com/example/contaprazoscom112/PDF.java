@@ -38,7 +38,7 @@ public class PDF  extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pdf);
         
-        //activity_main foi trocado por activity_listarprocesso
+        //activity_main foi trocado por activity_pdf
          
         b= (Button)findViewById(R.id.btngerarpdf);        
         b.setOnClickListener(new View.OnClickListener() {
