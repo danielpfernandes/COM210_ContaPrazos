@@ -19,17 +19,25 @@ import com.lowagie.text.pdf.PdfWriter;
 import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
  
 public class PDF  extends Activity {
  
-     
+     //yasmin 
+	public final Context ctx = this;
+	//
+	
     private Button b;
     
     @Override
@@ -38,9 +46,9 @@ public class PDF  extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pdf);
         
-        //activity_main foi trocado por activity_listarprocesso
+        //activity_main foi trocado por activity_pdf
          
-        b= (Button)findViewById(R.id.button1);        
+        b= (Button)findViewById(R.id.btngerarpdf);        
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,13 +67,15 @@ public class PDF  extends Activity {
          
          
          try {
-                String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/droidText";
-                  
-                File dir = new File(path);
+               // String path = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator +"droidText";
+                
+                File dir = new File(Environment.getExternalStorageDirectory()
+        				+ File.separator + "droidText");;
                     if(!dir.exists())
                         dir.mkdirs();
  
-                Log.d("PDFCreator", "PDF Path: " + path);
+                Log.d("PDFCreator", "PDF Path: " + Environment.getExternalStorageDirectory()
+        				+ File.separator + "droidText");
                  
                      
                 File file = new File(dir, "sample.pdf");
@@ -93,7 +103,7 @@ public class PDF  extends Activity {
                  doc.add(p2);
                   
                  ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                 Bitmap bitmap = BitmapFactory.decodeResource(getBaseContext().getResources(), R.drawable.android);
+                 Bitmap bitmap = BitmapFactory.decodeResource(getBaseContext().getResources(), R.drawable.and);
                  bitmap.compress(Bitmap.CompressFormat.JPEG, 100 , stream);
                  Image myImg = Image.getInstance(stream.toByteArray());
                  myImg.setAlignment(Image.MIDDLE);
@@ -118,6 +128,76 @@ public class PDF  extends Activity {
                  doc.close();
          }
         
-    }      
+    }   
+    private void SavePreferences(String key, String value) {
+		SharedPreferences sharedPreferences = getSharedPreferences("CoopFam", MODE_PRIVATE);
+		SharedPreferences.Editor editor = sharedPreferences.edit();
+		editor.putString(key, value);
+		editor.commit();
+	}
+    
+	// -----------------------------------------------------------------------------//
+	// MENU //
+	// -----------------------------------------------------------------------------//
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater menuInflater = getMenuInflater();
+		menuInflater.inflate(R.layout.menu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+
+
+		case R.id.menu_dest:
+			SavePreferences("LISTARDESTAQUE", "TRUE");
+			Intent intent = new Intent(ctx,
+					Activity_ListaProcessos.class);
+
+			startActivity(intent);
+			finish();
+
+
+			return true;
+
+		case R.id.menu_proc:
+			SavePreferences("LISTARDESTAQUE", "FALSE");
+			intent = new Intent(ctx,
+					Activity_ListaProcessos.class);
+
+			startActivity(intent);
+			finish();
+
+			return true;
+
+		case R.id.menu_sobre:
+			intent = new Intent(ctx,
+					Activity_Sobre.class);
+
+			startActivity(intent);
+			finish();
+			return true;
+
+		case R.id.menu_config:
+			intent = new Intent(ctx,
+					Activity_Configuracoes.class);
+
+			startActivity(intent);
+			finish();
+			return true;
+			
+		case R.id.menu_pdf:
+			intent = new Intent(ctx,
+					PDF.class);
+
+			startActivity(intent);
+			finish();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
 }
 

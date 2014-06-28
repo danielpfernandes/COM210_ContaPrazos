@@ -328,6 +328,14 @@ public class Activity_ListaProcessos extends Activity  {
 			startActivity(intent);
 			finish();
 			return true;
+			
+		case R.id.menu_pdf:
+			intent = new Intent(ctx,
+					PDF.class);
+
+			startActivity(intent);
+			finish();
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
