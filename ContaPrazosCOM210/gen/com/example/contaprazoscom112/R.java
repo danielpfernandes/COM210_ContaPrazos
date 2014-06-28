@@ -48,6 +48,7 @@ public final class R {
         public static final int user=0x7f020010;
     }
     public static final class id {
+<<<<<<< HEAD
         public static final int action_settings=0x7f090049;
         public static final int btnEditar=0x7f090042;
         public static final int btnLogar=0x7f090025;
@@ -55,6 +56,16 @@ public final class R {
         public static final int btndata=0x7f090006;
         public static final int btneditarprocesso=0x7f090038;
         public static final int btngerarpdf=0x7f090029;
+=======
+        public static final int action_settings=0x7f09004a;
+        public static final int btnEditar=0x7f090044;
+        public static final int btnLogar=0x7f090025;
+        public static final int btnLogoff=0x7f090045;
+        public static final int btndata=0x7f090006;
+        public static final int btneditarprocesso=0x7f09003a;
+        public static final int btngerarpdf=0x7f09002a;
+        public static final int btnvisualizarpdf=0x7f09002b;
+>>>>>>> origin/RelatorioPDF
         public static final int cadastro_scrl=0x7f090023;
         public static final int cadastro_usuario=0x7f090002;
         public static final int checkpermanecer=0x7f090028;
@@ -86,6 +97,7 @@ public final class R {
         public static final int imageSalvarProcesso=0x7f090001;
         public static final int imageSalvarUsuario=0x7f090013;
         public static final int imageUser=0x7f090020;
+<<<<<<< HEAD
         public static final int imageView1=0x7f09002a;
         public static final int layoutdata=0x7f090005;
         public static final int menu_config=0x7f090046;
@@ -121,7 +133,44 @@ public final class R {
         public static final int texttituloproc=0x7f090021;
         public static final int texttribunal=0x7f09002f;
         public static final int textvara=0x7f09002c;
+=======
+        public static final int imageView1=0x7f09002c;
+        public static final int layoutdata=0x7f090005;
+        public static final int menu_config=0x7f090048;
+        public static final int menu_dest=0x7f090046;
+        public static final int menu_proc=0x7f090047;
+        public static final int menu_sobre=0x7f090049;
+        public static final int spinnerCor=0x7f09001f;
+        public static final int spinnertempominimo=0x7f09001e;
+        public static final int tabela_processo=0x7f090024;
+        public static final int textView1=0x7f09003b;
+        public static final int textadvogado=0x7f090039;
+        public static final int textapelido=0x7f090043;
+        public static final int textautor=0x7f090035;
+        public static final int textcelular=0x7f090040;
+        public static final int textcidade=0x7f090032;
+        public static final int textcpf=0x7f09003e;
+        public static final int textdata=0x7f09003d;
+        public static final int textdatapublicacao=0x7f09002f;
+        public static final int textdespacho=0x7f090037;
+        public static final int texteditoucadproce=0x7f090000;
+        public static final int textemail=0x7f090041;
+        public static final int textendereco=0x7f09003f;
+        public static final int textexpediente=0x7f090033;
+        public static final int textjornal=0x7f090030;
+        public static final int textnome=0x7f09003c;
+        public static final int textnumoab=0x7f090042;
+        public static final int textnumprocesso=0x7f09002d;
+        public static final int textoEditouCad=0x7f090012;
+        public static final int textprazo=0x7f090038;
+        public static final int textreu=0x7f090036;
+        public static final int texttitulo=0x7f090034;
+        public static final int texttituloproc=0x7f090021;
+        public static final int texttribunal=0x7f090031;
+        public static final int textvara=0x7f09002e;
+>>>>>>> origin/RelatorioPDF
         public static final int txtdata=0x7f090007;
+        public static final int txtexport=0x7f090029;
     }
     public static final class layout {
         public static final int activity_cadproceso=0x7f030000;
