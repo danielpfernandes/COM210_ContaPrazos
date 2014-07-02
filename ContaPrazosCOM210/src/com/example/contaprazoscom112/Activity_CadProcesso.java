@@ -130,6 +130,7 @@ public class Activity_CadProcesso extends Activity{
 		EditText prazo = (EditText) findViewById(R.id.editprazo);
 		EditText advogado  = (EditText) findViewById(R.id.editadvogado);
 
+		processo.status = "OK";
 		processo.numprocesso = numprocesso.getText().toString(); 
 		processo.vara = vara.getText().toString();  
 		processo.datapublicacao = datapublicacao.getText().toString();  
