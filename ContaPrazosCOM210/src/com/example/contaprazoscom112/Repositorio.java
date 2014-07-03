@@ -31,7 +31,7 @@ public class Repositorio {
 	// Cria a tabela
 	private static final String[] SCRIPT_DATABASE_CREATE = new String[] {
 		"create table Usuario( _id integer primary key autoincrement, nomeusuario text, datadenascimento text, cpf text, endereco text, celular text, email text, numeroOAB text, apelido text, senha text);", 
-		"create table Processo ( _id integer primary key autoincrement, numprocesso text, vara text, datapublicacao text, jornal text, tribunal text, cidade text, expediente text, titulo text, autor text, reu text, despacho text, prazo text, advogado  text, destaque text);",
+		"create table Processo ( _id integer primary key autoincrement, numprocesso text, vara text, datapublicacao text, jornal text, tribunal text, cidade text, expediente text, titulo text, autor text, reu text, despacho text, prazo int, advogado  text, destaque text, status text);",
 	}
 	;
 
@@ -108,6 +108,7 @@ public class Repositorio {
 		values.put(Processos.PRAZO, objeto.prazo);
 		values.put(Processos.ADVOGADO    , objeto.advogado);
 		values.put(Processos.DESTAQUE  , objeto.destaque);
+		values.put(Processos.STATUS  , objeto.status);
 
 		long _id =inserirProcesso(values);
 
@@ -166,6 +167,7 @@ public class Repositorio {
 		values.put(Processos.PRAZO, objeto.prazo);
 		values.put(Processos.ADVOGADO    , objeto.advogado);
 		values.put(Processos.DESTAQUE    , objeto.destaque);
+		values.put(Processos.STATUS    , objeto.status);
 
 
 		String _id = String.valueOf(objeto._id);
@@ -174,7 +176,7 @@ public class Repositorio {
 		String[] whereArgs = new String[] { _id };
 
 		int count = atualizarProcesso(values, where, whereArgs);
-		
+
 		return count;
 	}
 	//-----------------------------------------------------------------------------//
@@ -220,9 +222,10 @@ public class Repositorio {
 			objeto.autor = c.getString(9);
 			objeto.reu= c.getString(10);
 			objeto.despacho= c.getString(11);
-			objeto.prazo = c.getString(12);
+			objeto.prazo = c.getInt(12);
 			objeto.advogado= c.getString(13);
 			objeto.destaque = c.getString(14);
+			objeto.status = c.getString(15);
 
 			c.close();
 			return objeto;
@@ -242,8 +245,8 @@ public class Repositorio {
 
 
 		try {
-			
-			Cursor c = db.query(NOME_TABELA_2, Processo.colunas, null, null, null, null, Processos.PRAZO);
+
+			Cursor c = db.query(NOME_TABELA_2, Processo.colunas, Processos.STATUS+ "='OK'", null, null, null, Processos.PRAZO);
 
 			if (c.moveToFirst()) {
 
@@ -265,9 +268,10 @@ public class Repositorio {
 					objeto.autor = c.getString(9);
 					objeto.reu= c.getString(10);
 					objeto.despacho= c.getString(11);
-					objeto.prazo = c.getString(12);
+					objeto.prazo = c.getInt(12);
 					objeto.advogado= c.getString(13);
 					objeto.destaque = c.getString(14);
+					objeto.status = c.getString(15);
 
 				} while (c.moveToNext());
 			}		
@@ -282,13 +286,13 @@ public class Repositorio {
 		return objetos;
 	}
 
-	
+
 	public List<Processo> listarProcessoDestaques(String _id) {
 		List<Processo> objetos = new ArrayList<Processo>();
 
 
 		try {
-			Cursor c = db.query(NOME_TABELA_2, Processo.colunas, Processos.DESTAQUE	 + "='TRUE'", null, null, null, null);
+			Cursor c = db.query(NOME_TABELA_2, Processo.colunas, Processos.DESTAQUE	 + "='TRUE' and "+Processos.STATUS +"='OK'", null, null, null, null);
 
 			if (c.moveToFirst()) {
 
@@ -310,9 +314,56 @@ public class Repositorio {
 					objeto.autor = c.getString(9);
 					objeto.reu= c.getString(10);
 					objeto.despacho= c.getString(11);
-					objeto.prazo = c.getString(12);
+					objeto.prazo = c.getInt(12);
 					objeto.advogado= c.getString(13);
 					objeto.destaque = c.getString(14);
+					objeto.status = c.getString(15);
+
+				} while (c.moveToNext());
+			}		
+			//c.close();		
+
+		} catch (SQLException e) {
+			Log.e(CATEGORIA, "Erro ao buscar o objeto: " + e.toString());
+
+			return null;
+		}
+
+		return objetos;
+	}
+
+	public List<Processo> listarProcessoCNC() {
+		List<Processo> objetos = new ArrayList<Processo>();
+
+
+		try {
+
+			Cursor c = db.query(NOME_TABELA_2, Processo.colunas,Processos.STATUS+ "='NORMAL'" , null, null, null, Processos.PRAZO);
+
+			if (c.moveToFirst()) {
+
+				// Loop até o final
+				do {
+					Processo objeto = new Processo();
+					objetos.add(objeto);
+
+					// recupera os atributos de objeto
+					objeto._id = c.getLong(0);
+					objeto.numprocesso = c.getString(1);
+					objeto.vara = c.getString(2);
+					objeto.datapublicacao = c.getString(3);
+					objeto.jornal = c.getString(4);
+					objeto.tribunal = c.getString(5);
+					objeto.cidade = c.getString(6);
+					objeto.expediente = c.getString(7);
+					objeto.titulo = c.getString(8);
+					objeto.autor = c.getString(9);
+					objeto.reu= c.getString(10);
+					objeto.despacho= c.getString(11);
+					objeto.prazo = c.getInt(12);
+					objeto.advogado= c.getString(13);
+					objeto.destaque = c.getString(14);
+					objeto.status = c.getString(15);
 
 				} while (c.moveToNext());
 			}		
@@ -326,6 +377,7 @@ public class Repositorio {
 
 		return objetos;
 	}
+
 
 	//-----------------------------------------------------------------------------//
 	// FINALIZAND                                                                  //
@@ -338,7 +390,7 @@ public class Repositorio {
 
 	public void apagarProcesso(){
 		db.execSQL("DROP TABLE IF EXISTS Processo;");
-		db.execSQL("create table Processo ( _id integer primary key autoincrement, numprocesso text, vara text, taxa text, datapublicacao text, jornal text, tribunal text, cidade text, expediente text, titulo text, autor text, reu text, despacho text, prazo text, advogado  text, destaque text);"
+		db.execSQL("create table Processo ( _id integer primary key autoincrement, numprocesso text, vara text, taxa text, datapublicacao text, jornal text, tribunal text, cidade text, expediente text, titulo text, autor text, reu text, despacho text, prazo int, advogado  text, destaque text, status text);"
 				);
 	}
 

@@ -130,6 +130,7 @@ public class Activity_CadProcesso extends Activity{
 		EditText prazo = (EditText) findViewById(R.id.editprazo);
 		EditText advogado  = (EditText) findViewById(R.id.editadvogado);
 
+		processo.status = "OK";
 		processo.numprocesso = numprocesso.getText().toString(); 
 		processo.vara = vara.getText().toString();  
 		processo.datapublicacao = datapublicacao.getText().toString();  
@@ -141,7 +142,7 @@ public class Activity_CadProcesso extends Activity{
 		processo.autor = autor.getText().toString();  
 		processo.reu = reu.getText().toString();  
 		processo.despacho = despacho.getText().toString();  
-		processo.prazo = prazo.getText().toString();
+		processo.prazo = Integer.valueOf(prazo.getText().toString());
 		processo.advogado = advogado.getText().toString();
 		processo.destaque = "FALSE";
 		SharedPreferences sharedPreferences = getSharedPreferences("CoopFam", Activity.MODE_PRIVATE);

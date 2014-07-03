@@ -85,7 +85,8 @@ public class Activity_VisUsuario extends Activity{
 				//limpando o PREFS
 				SharedPreferences settings = getSharedPreferences("CoopFam", Activity.MODE_PRIVATE);
 				settings.edit().clear().commit();
-
+				repositorio.apagarProcesso();
+				repositorio.apagarUsuario();
 				Intent intent = new Intent(ctx,
 						Activity_CadUsuario.class);
 				startActivity(intent);

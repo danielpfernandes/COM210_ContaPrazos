@@ -1,33 +1,46 @@
 package com.example.contaprazoscom112;
-
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.contaprazoscom112.R.color;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.Typeface;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.Toast;
+import android.widget.ViewAnimator;
 import android.text.format.Time;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.GestureDetector.OnGestureListener;
 import android.view.View.OnClickListener;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
+import android.view.GestureDetector;
+import android.view.View.OnTouchListener;
 import android.widget.TextView;
-import android.widget.Toast;
+import android.graphics.Color;
+import android.graphics.Typeface;
 
-public class Activity_ListaProcessos extends Activity  {
+public class Activity_cnc extends Activity {    
+	TableRow flingObj;
+	TableLayout mainScreen;
+	public int qualprocesso;
+	public long id;
+
 	public static Repositorio repositorio;
 	public final Context ctx = this;
 	private int mYear, mMonth, mDay;
@@ -37,10 +50,10 @@ public class Activity_ListaProcessos extends Activity  {
 
 	List<Processo> listaproc = new ArrayList<Processo>();
 	String[] listcor;
-	@Override
-	public void onCreate(Bundle iciBundle) {
-		super.onCreate(iciBundle);  
 
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
 		Time today = new Time(Time.getCurrentTimezone());
 		today.setToNow();
@@ -50,8 +63,10 @@ public class Activity_ListaProcessos extends Activity  {
 		mYear  = today.year; 
 
 		repositorio = new Repositorio(this);
-		setContentView(R.layout.activity_listarprocesso);
-		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+
+		setContentView(R.layout.activity_cnc);
+		mainScreen = (TableLayout)findViewById(R.id.tabela_processo);
 
 		CarregarCor();
 		CarregarTABELA();
@@ -63,12 +78,12 @@ public class Activity_ListaProcessos extends Activity  {
 		SharedPreferences sharedPreferences = getSharedPreferences("CoopFam", Activity.MODE_PRIVATE);
 		String cor = sharedPreferences.getString("COR", "");
 		listcor = listacorvermelho;
-		 if(cor.equals("Azul")){
-			listcor = listaazul;
+		if(cor.equals("Vermelho")){
+			listcor = listacorvermelho;
 		}else if(cor.equals("Amarelo")){
 			listcor = listaamarelo;
 		}else{
-			listcor = listacorvermelho;
+			listcor = listaazul;
 		}
 
 	}
@@ -79,7 +94,7 @@ public class Activity_ListaProcessos extends Activity  {
 			((TextView) findViewById(R.id.texttituloproc)).setText("          Destaques       ");
 			ListaProcesso = repositorio.listarProcessoDestaques(String.valueOf(1));
 		}else{
-			((TextView) findViewById(R.id.texttituloproc)).setText("          Processos       ");
+			((TextView) findViewById(R.id.texttituloproc)).setText("          Toast       ");
 			ListaProcesso = repositorio.listarProcesso(String.valueOf(1));
 		}
 
@@ -95,12 +110,9 @@ public class Activity_ListaProcessos extends Activity  {
 		TableRow.LayoutParams rowParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT,Gravity.RIGHT | Gravity.CENTER_VERTICAL);
 		tabela.setLayoutParams(tableParams);
 		CarregarProcessos();
-
-		for(int num=0; num<listaproc.size(); num++){	
-			TableRow tableRow1 = new TableRow(getApplicationContext());
+		for( int num=0; num<listaproc.size(); num++){	
+			final TableRow tableRow1 = new TableRow(getApplicationContext());
 			tableRow1.setLayoutParams(tableParams);
-
-
 			LinearLayout lin0 = new LinearLayout(getApplicationContext());
 			lin0.setOrientation(LinearLayout.VERTICAL);
 			String color = listcor[num];
@@ -169,14 +181,13 @@ public class Activity_ListaProcessos extends Activity  {
 
 			final CheckBox destaque = new CheckBox(getApplicationContext());
 			destaque.setButtonDrawable(R.drawable.custom_destaque);
-			
-			//TESTE
+
+
 			if(listaproc.get(num).destaque.equals("TRUE")){
 				destaque.setChecked(true);
 			}else{
 				destaque.setChecked(false);
 			}
-			//TESTE
 
 
 			TextView espaco2 = new TextView(getApplicationContext());
@@ -193,25 +204,44 @@ public class Activity_ListaProcessos extends Activity  {
 
 			tabela.addView(tableRow1);
 
-			final long id = listaproc.get(num)._id;
+			final long idr = listaproc.get(num)._id;
+			final int numr = num;
+			tableRow1.setOnClickListener(
+					new OnClickListener() {
+
+						@Override
+						public void onClick( View v ) {
+							SavePreferences("idprocesso", ""+idr);
+							Intent intent = new Intent(ctx,
+									Activity_VisProcesso.class);
+							startActivity(intent);
+
+						}					
+					}		
+
+					);
 
 
-
-			tableRow1.setOnClickListener( new OnClickListener() {
-				@Override
-				public void onClick( View v ) {
-					SavePreferences("idprocesso", ""+id);
-					Intent intent = new Intent(ctx,
-							Activity_VisProcesso.class);
-					startActivity(intent);
-
-				}
-			} );
-
-
-
+			id = listaproc.get(num)._id;
 
 			final int numi = num;
+			
+
+			final GestureDetector myGesture = new GestureDetector(this, new MyOnGestureListener());
+
+			tableRow1.setOnTouchListener(new OnTouchListener(){
+
+				@Override
+				public boolean onTouch(View v, MotionEvent event) {
+					qualprocesso= numi;
+					flingObj = tableRow1;
+					return myGesture.onTouchEvent(event);
+
+				}});
+
+			tableRow1.setClickable(true);
+
+
 			destaque.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -226,7 +256,7 @@ public class Activity_ListaProcessos extends Activity  {
 					}
 
 				}
-				
+
 
 			});
 
@@ -237,6 +267,71 @@ public class Activity_ListaProcessos extends Activity  {
 
 	}	
 
+	class MyOnGestureListener implements OnGestureListener{
+
+		int MIN_DIST = 100;
+
+		@Override
+		public boolean onDown(MotionEvent arg0) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+			if (Math.abs(e1.getY() - e2.getY()) > 250) {
+				return false;
+			}
+			//direita para esquerda
+			if (e1.getX() - e2.getX() > 200 && Math.abs(velocityX) > 200) {
+				flingObj.setBackgroundColor(Color.GREEN);
+				((LinearLayout) flingObj.getChildAt(0)).setBackgroundColor(Color.GREEN);
+				((LinearLayout) flingObj.getChildAt(2)).setBackgroundColor(Color.GREEN);
+				listaproc.get(qualprocesso).status = "CUMPRIDO";
+				listaproc.get(qualprocesso)._id = repositorio.atualizarProcesso(listaproc.get(qualprocesso));
+				Intent intent = new Intent(ctx,
+						Activity_cnc.class);
+				startActivity(intent);
+				finish();
+			} 
+			//direita para esquerda
+			else if (e2.getX() - e1.getX() > 200 && Math.abs(velocityX) > 200) {
+				flingObj.setBackgroundColor(Color.RED);
+				((LinearLayout) flingObj.getChildAt(0)).setBackgroundColor(Color.RED);
+				((LinearLayout) flingObj.getChildAt(2)).setBackgroundColor(Color.RED);
+				listaproc.get(qualprocesso).status = "NAOCUMPRIDO";
+				listaproc.get(qualprocesso)._id = repositorio.atualizarProcesso(listaproc.get(qualprocesso));
+				Intent intent = new Intent(ctx,	Activity_cnc.class);
+				startActivity(intent);
+				finish();
+			}
+			return true;
+
+		}
+
+		@Override
+		public void onLongPress(MotionEvent e) {
+		}
+
+		@Override
+		public boolean onScroll(MotionEvent e1, MotionEvent e2,
+				float distanceX, float distanceY) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public void onShowPress(MotionEvent e) {
+
+		}
+
+		@Override
+		public boolean onSingleTapUp(MotionEvent e) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+	};
 
 	public void AdicionarProcesso(){
 
@@ -248,13 +343,12 @@ public class Activity_ListaProcessos extends Activity  {
 				Intent intent = new Intent(ctx,
 						Activity_CadProcesso.class);
 				startActivity(intent);
-
+				finish();
 			}
 		});
 	}
 
 	public void VisualizarUsuário(){
-
 		ImageButton btnUser = (ImageButton) findViewById(R.id.imageUser);
 		btnUser.setOnClickListener( new OnClickListener() {
 			@Override
@@ -263,7 +357,7 @@ public class Activity_ListaProcessos extends Activity  {
 				Intent intent = new Intent(ctx,
 						Activity_VisUsuario.class);
 				startActivity(intent);
-
+				finish();
 			}
 		});
 	}
@@ -274,8 +368,6 @@ public class Activity_ListaProcessos extends Activity  {
 		editor.putString(key, value);
 		editor.commit();
 	}
-
-
 
 	// -----------------------------------------------------------------------------//
 	// MENU //
@@ -327,7 +419,6 @@ public class Activity_ListaProcessos extends Activity  {
 			startActivity(intent);
 			finish();
 			return true;
-		//Trecho que fizemos - OBS ANNA
 		case R.id.menu_acaodotouch:
 			intent = new Intent(ctx,
 					Activity_cnc.class);
@@ -335,22 +426,19 @@ public class Activity_ListaProcessos extends Activity  {
 			startActivity(intent);
 			finish();
 			return true;
-//END
-		
+			//END
+
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
-
 	// -----------------------------------------------------------------------------//
 	// FINALIZANDO //
 	// -----------------------------------------------------------------------------//
-
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		//repositorio.fechar();
+		repositorio.fechar();
 	}
 
-
-}
+} 

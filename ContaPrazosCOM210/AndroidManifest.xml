@@ -65,6 +65,14 @@
             android:name="com.example.contaprazoscom112.Activity_Configuracoes"
             android:screenOrientation="portrait" >
         </activity>
+        
+        
+        <activity
+            android:name="com.example.contaprazoscom112.Activity_cnc"
+            android:screenOrientation="portrait" >
+        </activity>
+        
+        
     </application>
 
 </manifest>
