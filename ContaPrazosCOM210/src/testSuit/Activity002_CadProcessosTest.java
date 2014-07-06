@@ -53,8 +53,9 @@ public class Activity002_CadProcessosTest extends
 					.findViewById("com.example.contaprazoscom112.R.id.imageAdd"));
 			solo.waitForActivity("Activity_CadProcesso");			
 					
-			solo.drag(111, 133, 108, 294, 18);
-			solo.drag(111, 133, 108, 294, 18);
+			solo.drag(111, 133, 108, 325, 18);
+			solo.drag(111, 133, 108, 325, 18);
+			solo.drag(111, 133, 108, 325, 18);
 		
 			
 			assertTrue(
