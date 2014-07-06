@@ -52,11 +52,10 @@ public class Activity002_CadProcessosTest extends
 			solo.clickOnImageButton((ImageButton) solo
 					.findViewById("com.example.contaprazoscom112.R.id.imageAdd"));
 			solo.waitForActivity("Activity_CadProcesso");			
-			/*solo.drag(solo.toScreenX(0.042f), solo.toScreenX(0.033f),
-					solo.toScreenY(0.225f), solo.toScreenY(0.754f), 14);*/			
-			
-			solo.drag(solo.toScreenX(0.304f), solo.toScreenX(0.221f),
-					solo.toScreenY(0.335f), solo.toScreenY(0.999f), 16);
+					
+			solo.drag(111, 133, 108, 294, 18);
+			solo.drag(111, 133, 108, 294, 18);
+		
 			
 			assertTrue(
 					"Wait for edit text (id: com.example.contaprazoscom112.R.id.editnumprocesso) failed.",
