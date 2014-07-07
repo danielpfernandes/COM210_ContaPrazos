@@ -25,20 +25,16 @@ import android.view.View;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.View.OnClickListener;
 import android.view.GestureDetector;
-import android.view.View.OnTouchListener;
 import android.widget.TextView;
 import android.graphics.Color;
 import android.graphics.Typeface;
 
-public class Activity_cnc extends Activity /*implements OnGestureListener*/{    
-	//private LinearLayout main;    
-	//private TextView viewA;
-	//private GestureDetector gestureScanner;
-	TableRow flingObj;
-	TableLayout mainScreen;
-	
-	public int qualprocesso;
-	public long id;
+public class Activity_cnc extends Activity implements OnGestureListener{    
+	private LinearLayout main;    
+	private TextView viewA;
+
+	private GestureDetector gestureScanner;
+
 	//------------
 	public static Repositorio repositorio;
 	public final Context ctx = this;
@@ -71,14 +67,81 @@ public class Activity_cnc extends Activity /*implements OnGestureListener*/{
 		///------------
 
 		setContentView(R.layout.activity_cnc);
-		mainScreen = (TableLayout)findViewById(R.id.tabela_processo);
 
+		gestureScanner = new GestureDetector(this);
+		main = (LinearLayout) findViewById(R.id.layoutlinear);  
+
+		viewA = (TextView) findViewById(R.id.texttituloproc);
+
+		//---------
 		CarregarCor();
 		CarregarTABELA();
 		AdicionarProcesso();
 		VisualizarUsuário();
 
 	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent me) {
+		return gestureScanner.onTouchEvent(me);
+	}
+
+	@Override
+	public boolean onDown(MotionEvent e) {
+		return true;
+	}
+
+	@Override
+	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+		if (Math.abs(e1.getY() - e2.getY()) > 250) {
+			return false;
+		}
+
+		// Movimento da direita para esquerda
+		if (e1.getX() - e2.getX() > 100 && Math.abs(velocityX) > 200) {
+			viewA.setText("dir esq - Y: " +e1.getY()+ "-");
+			TableLayout tabela = (TableLayout) findViewById(R.id.tabela_processo);
+
+
+			int num =0;
+
+			TableRow row = ((TableRow) tabela.getChildAt(0));
+			row.setBackgroundColor(Color.GREEN);
+			((LinearLayout) row.getChildAt(0)).setBackgroundColor(Color.GREEN);
+			((LinearLayout) row.getChildAt(2)).setBackgroundColor(Color.GREEN);
+
+
+			// ((TextView) row.getChildAt(3)).setBackgroundColor(Color.GREEN);
+			// ((CheckBox) row.getChildAt(4)).setBackgroundColor(Color.GREEN);
+
+
+		} else if (e2.getX() - e1.getX() > 100 && Math.abs(velocityX) > 200) {
+			viewA.setText("esq dir- Y: " +e1.getY() + "-");
+		}
+		return true;
+	}
+
+	@Override
+	public void onLongPress(MotionEvent e) {
+	}
+
+	@Override
+	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+
+		return true;
+	}
+
+	@Override
+	public void onShowPress(MotionEvent e) {
+
+	}    
+
+	@Override
+	public boolean onSingleTapUp(MotionEvent e) {
+		return true;
+	}
+
+	////---------------
 
 	public void CarregarCor(){
 		SharedPreferences sharedPreferences = getSharedPreferences("CoopFam", Activity.MODE_PRIVATE);
@@ -191,12 +254,13 @@ public class Activity_cnc extends Activity /*implements OnGestureListener*/{
 			final CheckBox destaque = new CheckBox(getApplicationContext());
 			destaque.setButtonDrawable(R.drawable.custom_destaque);
 
-
+			//TESTE
 			if(listaproc.get(num).destaque.equals("TRUE")){
 				destaque.setChecked(true);
 			}else{
 				destaque.setChecked(false);
 			}
+			//TESTE
 
 
 			TextView espaco2 = new TextView(getApplicationContext());
@@ -213,20 +277,22 @@ public class Activity_cnc extends Activity /*implements OnGestureListener*/{
 
 			tabela.addView(tableRow1);
 
-			id = listaproc.get(num)._id;
+			final long id = listaproc.get(num)._id;
 
-			flingObj = tableRow1;
 
-			final GestureDetector myGesture = new GestureDetector(this, new MyOnGestureListener());
 
-			flingObj.setOnTouchListener(new OnTouchListener(){
-
+			tableRow1.setOnClickListener( new OnClickListener() {
 				@Override
-				public boolean onTouch(View v, MotionEvent event) {
-					return myGesture.onTouchEvent(event);
-				}});
+				public void onClick( View v ) {
+					SavePreferences("idprocesso", ""+id);
+					Intent intent = new Intent(ctx,
+							Activity_VisProcesso.class);
+					startActivity(intent);
 
-			flingObj.setClickable(true);
+				}
+			} );
+			
+
 
 
 			final int numi = num;
@@ -254,82 +320,6 @@ public class Activity_cnc extends Activity /*implements OnGestureListener*/{
 		}
 
 	}	
-
-	class MyOnGestureListener implements OnGestureListener{
-
-		int MIN_DIST = 100;
-
-		@Override
-		public boolean onDown(MotionEvent arg0) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-			if (Math.abs(e1.getY() - e2.getY()) > 250) {
-				return false;
-			}
-
-			TextView viewA = (TextView) findViewById(R.id.texttituloproc);
-			// Movimento da direita para esquerda
-			if (e1.getX() - e2.getX() > 100 && Math.abs(velocityX) > 100) {
-				flingObj.setBackgroundColor(Color.GREEN);
-				((LinearLayout) flingObj.getChildAt(0)).setBackgroundColor(Color.GREEN);
-				((LinearLayout) flingObj.getChildAt(2)).setBackgroundColor(Color.GREEN);
-				listaproc.get(qualprocesso).status = "CUMPRIDO";
-				listaproc.get(qualprocesso)._id = repositorio.atualizarProcesso(listaproc.get(qualprocesso));
-				Intent intent = new Intent(ctx,
-						Activity_cnc.class);
-				startActivity(intent);
-
-			} else if (e2.getX() - e1.getX() > 50 && Math.abs(velocityX) > 50) {
-				flingObj.setBackgroundColor(Color.RED);
-				((LinearLayout) flingObj.getChildAt(0)).setBackgroundColor(Color.RED);
-				((LinearLayout) flingObj.getChildAt(2)).setBackgroundColor(Color.RED);
-				listaproc.get(qualprocesso).status = "NAOCUMPRIDO";
-				listaproc.get(qualprocesso)._id = repositorio.atualizarProcesso(listaproc.get(qualprocesso));
-				Intent intent = new Intent(ctx,
-						Activity_cnc.class);
-				startActivity(intent);
-			}
-			return true;
-
-		}
-
-		@Override
-		public void onLongPress(MotionEvent e) {
-			SavePreferences("idprocesso", ""+listaproc.get(qualprocesso)._id);
-			Intent intent = new Intent(ctx,
-					Activity_VisProcesso.class);
-			startActivity(intent);
-		}
-
-		@Override
-		public boolean onScroll(MotionEvent e1, MotionEvent e2,
-				float distanceX, float distanceY) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public void onShowPress(MotionEvent e) {
-			SavePreferences("idprocesso", ""+id);
-			Intent intent = new Intent(ctx,
-					Activity_VisProcesso.class);
-			startActivity(intent);
-		}
-
-		@Override
-		public boolean onSingleTapUp(MotionEvent e) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-	};
-
-
-
 
 
 	public void AdicionarProcesso(){
