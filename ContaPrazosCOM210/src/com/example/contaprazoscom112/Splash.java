@@ -3,6 +3,8 @@ package com.example.contaprazoscom112;
 
 import java.io.File;
 
+import com.example.contaprazoscom112.R;
+
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
