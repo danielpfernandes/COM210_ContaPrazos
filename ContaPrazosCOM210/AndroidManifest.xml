@@ -8,6 +8,7 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
 
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -56,17 +57,24 @@
             android:name="com.example.contaprazoscom112.Activity_VisProcesso"
             android:screenOrientation="portrait" >
         </activity>
-        
         <activity
             android:name="com.example.contaprazoscom112.Activity_Sobre"
             android:screenOrientation="portrait" >
         </activity>
-        
-        
         <activity
             android:name="com.example.contaprazoscom112.Activity_Configuracoes"
             android:screenOrientation="portrait" >
         </activity>
+<<<<<<< HEAD
+        <activity
+            android:name="com.example.contaprazoscom112.RelatorioCumpridoNaoCumprido"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.contaprazoscom112.CriaNotificacao"
+            android:screenOrientation="portrait" >
+        </activity>
+=======
 <<<<<<< HEAD
         <uses-library android:name="android.test.runner" />
         
@@ -85,6 +93,7 @@
             android:screenOrientation="portrait" >
         </activity>
 >>>>>>> fd676f5a82a39f7a705c24abb08e1d2cda3c973b
+>>>>>>> master
 >>>>>>> master
     </application>
 

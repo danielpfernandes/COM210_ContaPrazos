@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10px"
-            android:text="          Touch       "
+            android:text="          Processos       "
             android:textColor="@color/branco"
             android:textSize="27dp" />
 
@@ -46,32 +46,19 @@
         android:layout_gravity="center_horizontal"
         android:layout_margin="10dp" >
 
+
         <LinearLayout
-            android:id="@+id/layoutlinear"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="0dp"
             android:orientation="horizontal" >
 
-<<<<<<< HEAD
-            
-                <TableLayout
-                    android:id="@+id/tabela_processo"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_gravity="center_horizontal" >
-                </TableLayout>
-            
-=======
-            <TableLayout
-                android:id="@+id/tabela_processo"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_horizontal" >
-            </TableLayout>
-
->>>>>>> master
+			
+        	<WebView
+            android:id="@+id/grafico"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

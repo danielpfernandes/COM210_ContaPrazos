@@ -87,7 +87,8 @@ public class Activity_VisUsuario extends Activity{
 				//limpando o PREFS
 				SharedPreferences settings = getSharedPreferences("CoopFam", Activity.MODE_PRIVATE);
 				settings.edit().clear().commit();
-
+				repositorio.apagarProcesso();
+				repositorio.apagarUsuario();
 				Intent intent = new Intent(ctx,
 						Activity_CadUsuario.class);
 				startActivity(intent);
@@ -95,5 +96,23 @@ public class Activity_VisUsuario extends Activity{
 			}});
 
 
+	}
+	// -----------------------------------------------------------------------------//
+	// FINALIZANDO //
+	// -----------------------------------------------------------------------------//
+	@Override
+	public void onPause() {
+		super.onPause();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		repositorio.fechar();
 	}
 }

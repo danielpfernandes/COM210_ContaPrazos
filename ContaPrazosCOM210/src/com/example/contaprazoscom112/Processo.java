@@ -1,5 +1,7 @@
 package com.example.contaprazoscom112;
 
+import java.sql.Date;
+
 import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
@@ -8,7 +10,11 @@ import android.provider.BaseColumns;
 //_ID NUMPROCESSO VARA DATAPUBLICACAO JORNAL TRIBUNAL CIDADE EXPEDIENTE TITULO AUTOR REU DESPACHO PRAZO ADVOGADO DESTAQUE STATUS
 
 public class Processo {
+<<<<<<< HEAD
+	public static String[] colunas = new String[] { Processos._ID, Processos.NUMPROCESSO, Processos.VARA, Processos.PUBLICACAODIA, Processos.PUBLICACAOMES, Processos.PUBLICACAOANO, Processos.JORNAL, Processos.TRIBUNAL, Processos.CIDADE, Processos.EXPEDIENTE, Processos.TITULO, Processos.AUTOR, Processos.REU, Processos.DESPACHO, Processos.PRAZO, Processos.ADVOGADO, Processos.DESTAQUE, Processos.STATUS};
+=======
 	public static String[] colunas = new String[] { Processos._ID, Processos.NUMPROCESSO, Processos.VARA, Processos.DATAPUBLICACAO, Processos.JORNAL, Processos.TRIBUNAL, Processos.CIDADE, Processos.EXPEDIENTE, Processos.TITULO, Processos.AUTOR, Processos.REU, Processos.DESPACHO, Processos.PRAZO, Processos.ADVOGADO, Processos.DESTAQUE, Processos.STATUS};
+>>>>>>> master
 	
 	//Pacote do Content Provider. Precisa ser único.
 	public static final String AUTHORITY = "nome.do.pacote.provider.Processo";
@@ -17,7 +23,9 @@ public class Processo {
 	public long _id;
 	public String numprocesso;
 	public String vara;
-	public String  datapublicacao  ;
+	public int  publicacaodia  ;
+	public int  publicacaomes  ;
+	public int  publicacaoano  ;
 	public String jornal  ;
 	public String tribunal  ;
 	public String cidade  ;
@@ -26,19 +34,25 @@ public class Processo {
 	public String autor; 
 	public String reu;
 	public String despacho;
-	public String prazo;
+	public int prazo;
 	public String advogado;
 	public String destaque;
 	public String status;
 	public Processo() {
 	}
 
+<<<<<<< HEAD
+	public Processo(String numprocesso,String vara , int  publicacaodia, int  publicacaomes, int  publicacaoano , String jornal, String tribunal, String cidade, String expediente, String titulo, String autor, String reu , String despacho, int prazo, String advogado, String destaque, String status) 
+=======
 	public Processo(String numprocesso,String vara , String  datapublicacao , String jornal, String tribunal, String cidade, String expediente, String titulo, String autor, String reu , String despacho, String prazo, String advogado, String destaque, String status) 
+>>>>>>> master
 	{
 		super();
 		this.numprocesso = numprocesso;
 		this.vara  = vara;
-		this.datapublicacao = datapublicacao;
+		this.publicacaodia = publicacaodia;
+		this.publicacaomes = publicacaomes;
+		this.publicacaoano = publicacaoano;
 		this.jornal  = jornal;
 		this.tribunal  = tribunal;
 		this.cidade   = cidade;
@@ -53,13 +67,19 @@ public class Processo {
 		this.status = status;
 	}
 
+<<<<<<< HEAD
+	public Processo(long _id, String numprocesso,String vara , int  publicacaodia, int  publicacaomes, int  publicacaoano , String jornal, String tribunal, String cidade, String expediente, String titulo, String autor, String reu , String despacho, int prazo, String advogado, String destaque, String status) 
+=======
 	public Processo(long _id, String numprocesso,String vara , String  datapublicacao , String jornal, String tribunal, String cidade, String expediente, String titulo, String autor, String reu , String despacho, String prazo,String advogado, String destaque, String status) 
+>>>>>>> master
 	{
 		super();
 		this._id = _id;
 		this.numprocesso = numprocesso;
 		this.vara  = vara;
-		this.datapublicacao = datapublicacao;
+		this.publicacaodia = publicacaodia;
+		this.publicacaomes = publicacaomes;
+		this.publicacaoano = publicacaoano;
 		this.jornal  = jornal;
 		this.tribunal  = tribunal;
 		this.cidade   = cidade;
@@ -72,8 +92,12 @@ public class Processo {
 		this.advogado = advogado;
 		this.destaque = destaque;
 		this.status = status;
+<<<<<<< HEAD
+		}
+=======
 			
 	}
+>>>>>>> master
 	
 	
 	public static final class Processos implements BaseColumns {
@@ -97,7 +121,9 @@ public class Processo {
 		public static final String _ID = "_id";
 		public static final String  NUMPROCESSO   = "numprocesso";
 		public static final String  VARA  = "vara";
-		public static final String DATAPUBLICACAO  = "datapublicacao";
+		public static final String PUBLICACAODIA  = "publicacaodia";
+		public static final String PUBLICACAOMES  = "publicacaomes";
+		public static final String PUBLICACAOANO  = "publicacaoano";
 		public static final String JORNAL     = "jornal";
 		public static final String TRIBUNAL   = "tribunal";
 		public static final String CIDADE  = "cidade";

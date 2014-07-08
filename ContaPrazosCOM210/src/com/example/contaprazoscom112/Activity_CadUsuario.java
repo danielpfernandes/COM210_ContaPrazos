@@ -5,9 +5,11 @@ import java.util.Calendar;
 import com.example.contaprazoscom112.R;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -76,16 +78,43 @@ public class Activity_CadUsuario extends Activity{
 		ImageButton btnSalvar = (ImageButton) findViewById(R.id.imageSalvarUsuario);
 		btnSalvar.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
-				salvarnobd();
-				Intent intent = new Intent(ctx,
-						Activity_ListaProcessos.class);
-				startActivity(intent);
-				finish();
+				validarDados();
+	
+				
 			}
 		});
 
 
 	}
+	
+	
+	public void validarDados(){
+		EditText nomeedit = (EditText) findViewById(R.id.editnome);
+		EditText senhaedit = (EditText) findViewById(R.id.editsenha);
+		if(nomeedit.getText().toString().equals("") || senhaedit.getText().toString().equals("")){
+
+			AlertDialog.Builder alertaprop = new AlertDialog.Builder(ctx);
+			alertaprop.setTitle("Campos obrigatório vazio.");
+			alertaprop.setMessage("Campos vazios");
+			alertaprop.setPositiveButton("OK", new DialogInterface.OnClickListener() {					
+				public void onClick(DialogInterface dialog, int which) {
+				}
+			});
+			alertaprop.show();
+
+		}else{
+			salvarnobd();
+			Intent intent = new Intent(ctx,
+					Activity_ListaProcessos.class);
+			startActivity(intent);
+			finish();
+
+		}
+
+
+	}
+	
+	
 	// -----------------------------------------------------------------------------//
 	// DISPLAY DE DATA //
 	// -----------------------------------------------------------------------------//

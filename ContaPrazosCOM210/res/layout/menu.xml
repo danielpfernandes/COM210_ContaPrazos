@@ -2,19 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/menu_dest"
-        android:title="Listar Destaques"/>
- 
- 	<item
         android:id="@+id/menu_proc"
         android:title="Listar Processos"/>
-    
- <item
+
+    <item
+        android:id="@+id/menu_dest"
+        android:title="Listar Destaques"/>
+
+    <item
         android:id="@+id/menu_config"
         android:title="Configurações"/>
- <item
+
+    <item
+        android:id="@+id/menu_rel"
+        android:title="Relatorios"/>
+
+    <item
         android:id="@+id/menu_sobre"
         android:title="Sobre"/>
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
  <!-- //Trecho que fizemos - OBS ANNA -->
  <item
@@ -26,5 +33,6 @@
         android:title="PDF"/>
 >>>>>>> fd676f5a82a39f7a705c24abb08e1d2cda3c973b
     
+>>>>>>> master
 
 </menu>
