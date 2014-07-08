@@ -15,6 +15,9 @@
  <item
         android:id="@+id/menu_sobre"
         android:title="Sobre"/>
+ <item
+        android:id="@+id/menu_pdf"
+        android:title="PDF"/>
     
 
 </menu>

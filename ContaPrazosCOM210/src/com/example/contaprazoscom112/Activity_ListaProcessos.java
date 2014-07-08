@@ -62,7 +62,6 @@ public class Activity_ListaProcessos extends Activity  {
 	public void CarregarCor(){
 		SharedPreferences sharedPreferences = getSharedPreferences("CoopFam", Activity.MODE_PRIVATE);
 		String cor = sharedPreferences.getString("COR", "");
-		Toast.makeText(ctx, "COR:" + cor, 1).show();
 		listcor = listacorvermelho;
 		 if(cor.equals("Azul")){
 			listcor = listaazul;
@@ -170,8 +169,14 @@ public class Activity_ListaProcessos extends Activity  {
 
 			final CheckBox destaque = new CheckBox(getApplicationContext());
 			destaque.setButtonDrawable(R.drawable.custom_destaque);
-
-
+			
+			//TESTE
+			if(listaproc.get(num).destaque.equals("TRUE")){
+				destaque.setChecked(true);
+			}else{
+				destaque.setChecked(false);
+			}
+			//TESTE
 
 
 			TextView espaco2 = new TextView(getApplicationContext());
@@ -221,7 +226,7 @@ public class Activity_ListaProcessos extends Activity  {
 					}
 
 				}
-
+				
 
 			});
 
@@ -319,6 +324,14 @@ public class Activity_ListaProcessos extends Activity  {
 		case R.id.menu_config:
 			intent = new Intent(ctx,
 					Activity_Configuracoes.class);
+
+			startActivity(intent);
+			finish();
+			return true;
+			
+		case R.id.menu_pdf:
+			intent = new Intent(ctx,
+					PDF.class);
 
 			startActivity(intent);
 			finish();

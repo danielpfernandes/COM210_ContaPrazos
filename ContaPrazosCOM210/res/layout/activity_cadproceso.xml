@@ -58,7 +58,8 @@
 	                android:id="@+id/editnumprocesso"
 	                android:layout_width="match_parent"
 	                android:layout_height="wrap_content"
-	                android:ems="10" >
+	                android:ems="10"
+	                android:inputType="text" >
 
 	                <requestFocus />
 	            </EditText>
@@ -71,10 +72,11 @@
 	            android:textSize="18dp" />
 	             
 					            <EditText
-	                android:id="@+id/editvara"
-	                android:layout_width="match_parent"
-	                android:layout_height="wrap_content"
-	                android:ems="10" >
+					                android:id="@+id/editvara"
+					                android:layout_width="match_parent"
+					                android:layout_height="wrap_content"
+					                android:ems="10"
+					                android:inputType="text" >
 
 	                <requestFocus />	             
 	            </EditText>
@@ -122,7 +124,8 @@
 	                 android:id="@+id/editjornal"
 	                 android:layout_width="match_parent"
 	                 android:layout_height="wrap_content"
-	                 android:ems="10" >
+	                 android:ems="10"
+	                 android:inputType="text" >
 
 	                <requestFocus />	             
 	            </EditText>
@@ -138,7 +141,8 @@
 	                  android:layout_width="match_parent"
 	                  android:layout_height="wrap_content"
 	                  android:ems="10"
-	                  >
+	                  android:inputType="text" >
+
 	                  <requestFocus /></EditText>
 	             <TextView
 	            android:layout_width="wrap_content"
@@ -152,7 +156,8 @@
 	                 android:layout_width="match_parent"
 	                 android:layout_height="wrap_content"
 	                 android:ems="10"
-	              >
+	                 android:inputType="text" >
+
 	                  <requestFocus />
 	             </EditText>
 	             <TextView
@@ -166,7 +171,9 @@
 	                 android:id="@+id/editexpediente"
 	                 android:layout_width="match_parent"
 	                 android:layout_height="wrap_content"
-	                 android:ems="10" >
+	                 android:ems="10"
+	                 android:inputType="text" >
+
 	                  <requestFocus />
 	             </EditText>
 	              <TextView
@@ -180,7 +187,9 @@
 	                  android:id="@+id/edittitulo"
 	                  android:layout_width="match_parent"
 	                  android:layout_height="wrap_content"
-	                  android:ems="10" >
+	                  android:ems="10"
+	                  android:inputType="text" >
+
 	                  <requestFocus />
 	             </EditText>
 	             
@@ -195,7 +204,9 @@
 	                   android:id="@+id/editautor"
 	                   android:layout_width="match_parent"
 	                   android:layout_height="wrap_content"
-	                   android:ems="10" >
+	                   android:ems="10"
+	                   android:inputType="text" >
+
 	                  <requestFocus />
 	             </EditText>
 	               <TextView
@@ -209,7 +220,9 @@
                                             android:id="@+id/editreu"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:ems="10" >
+                                            android:ems="10"
+                                            android:inputType="text" >
+
 	                  <requestFocus />
 	             </EditText>
                                         <TextView
@@ -223,7 +236,9 @@
                                             android:id="@+id/editdespacho"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:ems="10" >
+                                            android:ems="10"
+                                            android:inputType="text" >
+
 	                  <requestFocus />
 	             </EditText>
 	             
@@ -256,7 +271,9 @@
                                             android:id="@+id/editadvogado"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:ems="10" >
+                                            android:ems="10"
+                                            android:inputType="text" >
+
 	                  <requestFocus />
 	             </EditText>
 	             	              

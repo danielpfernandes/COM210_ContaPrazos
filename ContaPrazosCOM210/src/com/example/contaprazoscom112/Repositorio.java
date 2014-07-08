@@ -224,7 +224,6 @@ public class Repositorio {
 			objeto.advogado= c.getString(13);
 			objeto.destaque = c.getString(14);
 
-			Log.e("ATUALIZOU PROCESSO", "te");
 			c.close();
 			return objeto;
 		}
@@ -272,7 +271,7 @@ public class Repositorio {
 
 				} while (c.moveToNext());
 			}		
-			c.close();		
+			//c.close();		
 
 		} catch (SQLException e) {
 			Log.e(CATEGORIA, "Erro ao buscar o objeto: " + e.toString());
@@ -317,7 +316,7 @@ public class Repositorio {
 
 				} while (c.moveToNext());
 			}		
-			c.close();		
+			//c.close();		
 
 		} catch (SQLException e) {
 			Log.e(CATEGORIA, "Erro ao buscar o objeto: " + e.toString());
