@@ -95,4 +95,22 @@ public class Activity_VisUsuario extends Activity{
 
 
 	}
+	// -----------------------------------------------------------------------------//
+	// FINALIZANDO //
+	// -----------------------------------------------------------------------------//
+	@Override
+	public void onPause() {
+		super.onPause();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		repositorio.fechar();
+	}
 }

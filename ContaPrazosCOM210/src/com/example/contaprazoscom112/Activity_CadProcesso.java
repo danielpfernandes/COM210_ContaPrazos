@@ -32,6 +32,7 @@ public class Activity_CadProcesso extends Activity{
 	private int mYear, mMonth, mDay;
 	static final int DATE_DIALOG_ID = 1;
 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,16 +40,19 @@ public class Activity_CadProcesso extends Activity{
 		Data();
 		repositorio = new Repositorio(this);
 		salvar();
-
-
+		
 		Editando();
 	}
 
 	public void Editando(){
 		SharedPreferences sharedPreferences = getSharedPreferences("CoopFam", Activity.MODE_PRIVATE);
+		
 		if(sharedPreferences.getString("EditarProcesso", "").equals("TRUE")){
-			String id = sharedPreferences.getString("idprocesso", "");
-			processo = repositorio.buscarProcesso(Long.parseLong(id));
+			String buscar = sharedPreferences.getString("idprocesso", "");
+			long idd = Long.valueOf(buscar);
+			
+			processo = repositorio.buscarProcesso(idd);
+			
 			((TextView) findViewById(R.id.texteditoucadproce)).setText("       Alterar processo   ");
 			LoadProcesso();
 		}
@@ -58,7 +62,8 @@ public class Activity_CadProcesso extends Activity{
 
 		((EditText) findViewById(R.id.editnumprocesso)).setText(processo.numprocesso);
 		((EditText) findViewById(R.id.editvara)).setText(processo.vara);
-		((TextView) findViewById(R.id.txtdata)).setText(processo.datapublicacao);
+		String data = processo.publicacaodia+"/"+processo.publicacaomes+"/"+processo.publicacaoano;
+		((TextView) findViewById(R.id.txtdata)).setText(data);
 		((EditText) findViewById(R.id.editjornal)).setText(processo.jornal);
 		((EditText) findViewById(R.id.edittribunal)).setText(processo.tribunal);
 		((EditText) findViewById(R.id.editcidade)).setText(processo.cidade);
@@ -67,7 +72,7 @@ public class Activity_CadProcesso extends Activity{
 		((EditText) findViewById(R.id.editautor)).setText(processo.autor);
 		((EditText) findViewById(R.id.editreu)).setText(processo.reu);
 		((EditText) findViewById(R.id.editdespacho)).setText(processo.despacho);
-		((EditText) findViewById(R.id.editprazo)).setText(processo.prazo);
+		((EditText) findViewById(R.id.editprazo)).setText(""+processo.prazo);
 		((EditText) findViewById(R.id.editadvogado)).setText(processo.advogado);
 
 
@@ -118,7 +123,6 @@ public class Activity_CadProcesso extends Activity{
 	public void salvarnobd() {
 		EditText numprocesso  = (EditText) findViewById(R.id.editnumprocesso);
 		EditText vara  = (EditText) findViewById(R.id.editvara);
-		TextView datapublicacao  = (TextView) findViewById(R.id.txtdata);
 		EditText jornal  = (EditText) findViewById(R.id.editjornal);
 		EditText tribunal  = (EditText) findViewById(R.id.edittribunal);
 		EditText cidade  = (EditText) findViewById(R.id.editcidade);
@@ -133,7 +137,7 @@ public class Activity_CadProcesso extends Activity{
 		processo.status = "OK";
 		processo.numprocesso = numprocesso.getText().toString(); 
 		processo.vara = vara.getText().toString();  
-		processo.datapublicacao = datapublicacao.getText().toString();  
+		//processo datadepublicacao já foi inserido na parte de Display de data
 		processo.jornal = jornal.getText().toString();  
 		processo.tribunal = tribunal.getText().toString();  
 		processo.cidade = cidade.getText().toString();  
@@ -219,6 +223,11 @@ public class Activity_CadProcesso extends Activity{
 			c = "0" + c;
 		}
 		TextView mDateDisplay = (TextView) findViewById(R.id.txtdata);
+		
+		processo.publicacaodia = mDay;
+		processo.publicacaomes = mMonth+1;
+		processo.publicacaoano = mYear;
+		
 		mDateDisplay.setText(new StringBuilder()
 		// Month is 0 based so add 1
 		.append(mDay).append("/").append(c).append("/").append(mYear)

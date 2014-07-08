@@ -19,28 +19,37 @@ public class Activity_Configuracoes extends Activity{
 	public final Context ctx = this;
 	private final String[] listadias = { "1 dia", "2 dias",
 			"3 dias", "4 dias", "5 dias", "6 dias", "7 dias"};	
-	
+
 	private final String[] listaCores = { "Vermelho", "Azul",
-			"Amarelo"};	
+	"Amarelo"};	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_configuracao);	
-		
-		Spinner tempo = (Spinner) findViewById(R.id.spinnertempominimo);
-		ArrayAdapter<String> tempoarray = new ArrayAdapter<String>(this,
-				R.layout.spinner_custom, listadias);
-		tempoarray.setDropDownViewResource(R.layout.spinner_list_custom);
-		tempo.setAdapter(tempoarray);
-		
+		SharedPreferences sharedPreferences = getSharedPreferences("CoopFam", Activity.MODE_PRIVATE);
+		String strcor = sharedPreferences.getString("COR", "");
+		if(strcor.equals("") || strcor == null) strcor = "Azul";
 		Spinner cor = (Spinner) findViewById(R.id.spinnerCor);
 		ArrayAdapter<String> corarray = new ArrayAdapter<String>(this,
 				R.layout.spinner_custom, listaCores);
 		corarray.setDropDownViewResource(R.layout.spinner_list_custom);
 		cor.setAdapter(corarray);
-		 SalvarConfiguracoes();
+		int spinnerPositionCor = corarray.getPosition(strcor);
+		cor.setSelection(spinnerPositionCor);
 
+		String strprazomin = sharedPreferences.getString("NOTIFPRAZO", "");
+		if(strprazomin.equals("") || strprazomin == null) strcor = "2 dias";
+
+		Spinner tempo = (Spinner) findViewById(R.id.spinnertempominimo);
+		ArrayAdapter<String> tempoarray = new ArrayAdapter<String>(this,
+				R.layout.spinner_custom, listadias);
+		tempoarray.setDropDownViewResource(R.layout.spinner_list_custom);
+		tempo.setAdapter(tempoarray);
+		int spinnerPositionTempo = tempoarray.getPosition(strprazomin);
+		tempo.setSelection(spinnerPositionTempo);
+
+		SalvarConfiguracoes();
 	}
 	public void SalvarConfiguracoes(){
 		ImageButton btnSalvar = (ImageButton) findViewById(R.id.imageSalvarConfiguracoes);
@@ -49,6 +58,11 @@ public class Activity_Configuracoes extends Activity{
 				Integer icor = ((Spinner) findViewById(R.id.spinnerCor))
 						.getSelectedItemPosition();
 				SavePreferences("COR", listaCores[icor]);
+
+				Integer iprazo = ((Spinner) findViewById(R.id.spinnertempominimo))
+						.getSelectedItemPosition();
+
+				SavePreferences("NOTIFPRAZO", listadias[iprazo]);
 
 				Intent intent = new Intent(ctx,
 						Activity_ListaProcessos.class);
@@ -59,10 +73,10 @@ public class Activity_Configuracoes extends Activity{
 
 
 	}
-	
 
-	
-	
+
+
+
 	// -----------------------------------------------------------------------------//
 	// MENU //
 	// -----------------------------------------------------------------------------//
@@ -72,7 +86,7 @@ public class Activity_Configuracoes extends Activity{
 		editor.putString(key, value);
 		editor.commit();
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater menuInflater = getMenuInflater();
@@ -109,7 +123,6 @@ public class Activity_Configuracoes extends Activity{
 		case R.id.menu_sobre:
 			intent = new Intent(ctx,
 					Activity_Sobre.class);
-
 			startActivity(intent);
 			finish();
 			return true;
@@ -121,9 +134,17 @@ public class Activity_Configuracoes extends Activity{
 			startActivity(intent);
 			finish();
 			return true;
+
+		case R.id.menu_rel:
+			intent = new Intent(ctx,
+					RelatorioCumpridoNaoCumprido.class);
+
+			startActivity(intent);
+			finish();
+			return true;
+
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
-
 }

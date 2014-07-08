@@ -17,6 +17,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 public class Repositorio {
+	//select count(*) from Processo where status = 'CUMPRIDO'
 	// Nome da Categoria
 	private static final String CATEGORIA = "categoria";
 	// Nome do banco
@@ -31,7 +32,7 @@ public class Repositorio {
 	// Cria a tabela
 	private static final String[] SCRIPT_DATABASE_CREATE = new String[] {
 		"create table Usuario( _id integer primary key autoincrement, nomeusuario text, datadenascimento text, cpf text, endereco text, celular text, email text, numeroOAB text, apelido text, senha text);", 
-		"create table Processo ( _id integer primary key autoincrement, numprocesso text, vara text, datapublicacao text, jornal text, tribunal text, cidade text, expediente text, titulo text, autor text, reu text, despacho text, prazo int, advogado  text, destaque text, status text);",
+		"create table Processo ( _id integer primary key autoincrement, numprocesso text, vara text, publicacaodia int, publicacaomes int, publicacaoano int, jornal text, tribunal text, cidade text, expediente text, titulo text, autor text, reu text, despacho text, prazo int, advogado  text, destaque text, status text);",
 	}
 	;
 
@@ -96,7 +97,9 @@ public class Repositorio {
 		ContentValues values = new ContentValues();
 		values.put(Processos.NUMPROCESSO, objeto.numprocesso);
 		values.put(Processos.VARA  , objeto.vara);
-		values.put(Processos.DATAPUBLICACAO  , objeto.datapublicacao);
+		values.put(Processos.PUBLICACAODIA  , objeto.publicacaodia);
+		values.put(Processos.PUBLICACAOMES  , objeto.publicacaomes);
+		values.put(Processos.PUBLICACAOANO  , objeto.publicacaoano);
 		values.put(Processos.JORNAL  , objeto.jornal);
 		values.put(Processos.TRIBUNAL  , objeto.tribunal);
 		values.put(Processos.CIDADE   , objeto.cidade);
@@ -155,7 +158,9 @@ public class Repositorio {
 
 		values.put(Processos.NUMPROCESSO, objeto.numprocesso);
 		values.put(Processos.VARA  , objeto.vara);
-		values.put(Processos.DATAPUBLICACAO  , objeto.datapublicacao);
+		values.put(Processos.PUBLICACAODIA  , objeto.publicacaodia);
+		values.put(Processos.PUBLICACAOMES  , objeto.publicacaomes);
+		values.put(Processos.PUBLICACAOANO  , objeto.publicacaoano);
 		values.put(Processos.JORNAL  , objeto.jornal);
 		values.put(Processos.TRIBUNAL  , objeto.tribunal);
 		values.put(Processos.CIDADE   , objeto.cidade);
@@ -213,19 +218,21 @@ public class Repositorio {
 			objeto._id = c.getLong(0);
 			objeto.numprocesso = c.getString(1);
 			objeto.vara = c.getString(2);
-			objeto.datapublicacao = c.getString(3);
-			objeto.jornal = c.getString(4);
-			objeto.tribunal = c.getString(5);
-			objeto.cidade = c.getString(6);
-			objeto.expediente = c.getString(7);
-			objeto.titulo = c.getString(8);
-			objeto.autor = c.getString(9);
-			objeto.reu= c.getString(10);
-			objeto.despacho= c.getString(11);
-			objeto.prazo = c.getInt(12);
-			objeto.advogado= c.getString(13);
-			objeto.destaque = c.getString(14);
-			objeto.status = c.getString(15);
+			objeto.publicacaodia = c.getInt(3);
+			objeto.publicacaomes = c.getInt(4);
+			objeto.publicacaoano = c.getInt(5);
+			objeto.jornal = c.getString(6);
+			objeto.tribunal = c.getString(7);
+			objeto.cidade = c.getString(8);
+			objeto.expediente = c.getString(9);
+			objeto.titulo = c.getString(10);
+			objeto.autor = c.getString(11);
+			objeto.reu= c.getString(12);
+			objeto.despacho= c.getString(13);
+			objeto.prazo = c.getInt(14);
+			objeto.advogado= c.getString(15);
+			objeto.destaque = c.getString(16);
+			objeto.status = c.getString(17);
 
 			c.close();
 			return objeto;
@@ -233,7 +240,6 @@ public class Repositorio {
 		c.close();		
 		return null;
 	}
-
 
 
 
@@ -259,23 +265,25 @@ public class Repositorio {
 					objeto._id = c.getLong(0);
 					objeto.numprocesso = c.getString(1);
 					objeto.vara = c.getString(2);
-					objeto.datapublicacao = c.getString(3);
-					objeto.jornal = c.getString(4);
-					objeto.tribunal = c.getString(5);
-					objeto.cidade = c.getString(6);
-					objeto.expediente = c.getString(7);
-					objeto.titulo = c.getString(8);
-					objeto.autor = c.getString(9);
-					objeto.reu= c.getString(10);
-					objeto.despacho= c.getString(11);
-					objeto.prazo = c.getInt(12);
-					objeto.advogado= c.getString(13);
-					objeto.destaque = c.getString(14);
-					objeto.status = c.getString(15);
+					objeto.publicacaodia = c.getInt(3);
+					objeto.publicacaomes = c.getInt(4);
+					objeto.publicacaoano = c.getInt(5);
+					objeto.jornal = c.getString(6);
+					objeto.tribunal = c.getString(7);
+					objeto.cidade = c.getString(8);
+					objeto.expediente = c.getString(9);
+					objeto.titulo = c.getString(10);
+					objeto.autor = c.getString(11);
+					objeto.reu= c.getString(12);
+					objeto.despacho= c.getString(13);
+					objeto.prazo = c.getInt(14);
+					objeto.advogado= c.getString(15);
+					objeto.destaque = c.getString(16);
+					objeto.status = c.getString(17);
 
 				} while (c.moveToNext());
 			}		
-			//c.close();		
+			c.close();		
 
 		} catch (SQLException e) {
 			Log.e(CATEGORIA, "Erro ao buscar o objeto: " + e.toString());
@@ -305,23 +313,25 @@ public class Repositorio {
 					objeto._id = c.getLong(0);
 					objeto.numprocesso = c.getString(1);
 					objeto.vara = c.getString(2);
-					objeto.datapublicacao = c.getString(3);
-					objeto.jornal = c.getString(4);
-					objeto.tribunal = c.getString(5);
-					objeto.cidade = c.getString(6);
-					objeto.expediente = c.getString(7);
-					objeto.titulo = c.getString(8);
-					objeto.autor = c.getString(9);
-					objeto.reu= c.getString(10);
-					objeto.despacho= c.getString(11);
-					objeto.prazo = c.getInt(12);
-					objeto.advogado= c.getString(13);
-					objeto.destaque = c.getString(14);
-					objeto.status = c.getString(15);
+					objeto.publicacaodia = c.getInt(3);
+					objeto.publicacaomes = c.getInt(4);
+					objeto.publicacaoano = c.getInt(5);
+					objeto.jornal = c.getString(6);
+					objeto.tribunal = c.getString(7);
+					objeto.cidade = c.getString(8);
+					objeto.expediente = c.getString(9);
+					objeto.titulo = c.getString(10);
+					objeto.autor = c.getString(11);
+					objeto.reu= c.getString(12);
+					objeto.despacho= c.getString(13);
+					objeto.prazo = c.getInt(14);
+					objeto.advogado= c.getString(15);
+					objeto.destaque = c.getString(16);
+					objeto.status = c.getString(17);
 
 				} while (c.moveToNext());
 			}		
-			//c.close();		
+			c.close();		
 
 		} catch (SQLException e) {
 			Log.e(CATEGORIA, "Erro ao buscar o objeto: " + e.toString());
@@ -332,13 +342,12 @@ public class Repositorio {
 		return objetos;
 	}
 
-	public List<Processo> listarProcessoCNC() {
+	public List<Processo> listarProcessoPorMes(String status, int mes, int ano) {
 		List<Processo> objetos = new ArrayList<Processo>();
-
 
 		try {
 
-			Cursor c = db.query(NOME_TABELA_2, Processo.colunas,Processos.STATUS+ "='NORMAL'" , null, null, null, Processos.PRAZO);
+			Cursor c = db.query(NOME_TABELA_2, Processo.colunas,Processos.STATUS+ "='" + status+"' and "+Processos.PUBLICACAOMES + "='"+ mes+"' and "+Processos.PUBLICACAOANO + "='"+ ano +"'", null, null, null, Processos.PRAZO);
 
 			if (c.moveToFirst()) {
 
@@ -351,34 +360,52 @@ public class Repositorio {
 					objeto._id = c.getLong(0);
 					objeto.numprocesso = c.getString(1);
 					objeto.vara = c.getString(2);
-					objeto.datapublicacao = c.getString(3);
-					objeto.jornal = c.getString(4);
-					objeto.tribunal = c.getString(5);
-					objeto.cidade = c.getString(6);
-					objeto.expediente = c.getString(7);
-					objeto.titulo = c.getString(8);
-					objeto.autor = c.getString(9);
-					objeto.reu= c.getString(10);
-					objeto.despacho= c.getString(11);
-					objeto.prazo = c.getInt(12);
-					objeto.advogado= c.getString(13);
-					objeto.destaque = c.getString(14);
-					objeto.status = c.getString(15);
+					objeto.publicacaodia = c.getInt(3);
+					objeto.publicacaomes = c.getInt(4);
+					objeto.publicacaoano = c.getInt(5);
+					objeto.jornal = c.getString(6);
+					objeto.tribunal = c.getString(7);
+					objeto.cidade = c.getString(8);
+					objeto.expediente = c.getString(9);
+					objeto.titulo = c.getString(10);
+					objeto.autor = c.getString(11);
+					objeto.reu= c.getString(12);
+					objeto.despacho= c.getString(13);
+					objeto.prazo = c.getInt(14);
+					objeto.advogado= c.getString(15);
+					objeto.destaque = c.getString(16);
+					objeto.status = c.getString(17);
 
 				} while (c.moveToNext());
 			}		
-			//c.close();		
+			c.close();		
 
 		} catch (SQLException e) {
 			Log.e(CATEGORIA, "Erro ao buscar o objeto: " + e.toString());
 
 			return null;
-		}	
-
+		} 
 		return objetos;
 	}
 
 
+	
+	
+	
+	public int ContarProcessos(String status, int mes, int ano) {
+			Cursor c = db.query(NOME_TABELA_2, Processo.colunas,Processos.STATUS+ "='" + status+"' and "+Processos.PUBLICACAOMES + "='"+ mes+"' and "+Processos.PUBLICACAOANO + "='"+ ano +"'", null, null, null, Processos.PRAZO);
+			int count = c.getCount(); 
+			c.close();
+		return count; 
+	}
+
+	public int ContarProcessosNAOCUMPRIDO() {
+		Cursor c = db.query(NOME_TABELA_2, Processo.colunas, Processos.STATUS+ "='NAOCUMPRIDO'", null, null, null, null);
+		int count = c.getCount(); 
+		c.close();
+		return count; 
+
+	}
 	//-----------------------------------------------------------------------------//
 	// FINALIZAND                                                                  //
 	//-----------------------------------------------------------------------------//
@@ -390,7 +417,7 @@ public class Repositorio {
 
 	public void apagarProcesso(){
 		db.execSQL("DROP TABLE IF EXISTS Processo;");
-		db.execSQL("create table Processo ( _id integer primary key autoincrement, numprocesso text, vara text, taxa text, datapublicacao text, jornal text, tribunal text, cidade text, expediente text, titulo text, autor text, reu text, despacho text, prazo int, advogado  text, destaque text, status text);"
+		db.execSQL("create table Processo ( _id integer primary key autoincrement, numprocesso text, vara text, taxa text, publicacaodia int, publicacaomes int, publicacaoano int, jornal text, tribunal text, cidade text, expediente text, titulo text, autor text, reu text, despacho text, prazo int, advogado  text, destaque text, status text);"
 				);
 	}
 

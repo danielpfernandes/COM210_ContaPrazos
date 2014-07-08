@@ -1,33 +1,49 @@
 package com.example.contaprazoscom112;
-
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.contaprazoscom112.R.color;
+
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.Typeface;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.Toast;
+import android.widget.ViewAnimator;
 import android.text.format.Time;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.GestureDetector.OnGestureListener;
 import android.view.View.OnClickListener;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
+import android.view.GestureDetector;
+import android.view.View.OnTouchListener;
 import android.widget.TextView;
-import android.widget.Toast;
+import android.graphics.Color;
+import android.graphics.Typeface;
 
-public class Activity_ListaProcessos extends Activity  {
+public class Activity_ListaProcessos extends Activity {    
+	TableRow flingObj;
+	TableLayout mainScreen;
+	public int qualprocesso;
+	public long id;
+
 	public static Repositorio repositorio;
 	public final Context ctx = this;
 	private int mYear, mMonth, mDay;
@@ -37,10 +53,10 @@ public class Activity_ListaProcessos extends Activity  {
 
 	List<Processo> listaproc = new ArrayList<Processo>();
 	String[] listcor;
-	@Override
-	public void onCreate(Bundle iciBundle) {
-		super.onCreate(iciBundle);  
 
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
 		Time today = new Time(Time.getCurrentTimezone());
 		today.setToNow();
@@ -50,10 +66,14 @@ public class Activity_ListaProcessos extends Activity  {
 		mYear  = today.year; 
 
 		repositorio = new Repositorio(this);
-		setContentView(R.layout.activity_listarprocesso);
-		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+
+		setContentView(R.layout.activity_cnc);
+		mainScreen = (TableLayout)findViewById(R.id.tabela_processo);
+		CarregarProcessos();
 
 		CarregarCor();
+		notificarPrazo();
 		CarregarTABELA();
 		AdicionarProcesso();
 		VisualizarUsuário();
@@ -63,12 +83,12 @@ public class Activity_ListaProcessos extends Activity  {
 		SharedPreferences sharedPreferences = getSharedPreferences("CoopFam", Activity.MODE_PRIVATE);
 		String cor = sharedPreferences.getString("COR", "");
 		listcor = listacorvermelho;
-		 if(cor.equals("Azul")){
-			listcor = listaazul;
+		if(cor.equals("Vermelho")){
+			listcor = listacorvermelho;
 		}else if(cor.equals("Amarelo")){
 			listcor = listaamarelo;
 		}else{
-			listcor = listacorvermelho;
+			listcor = listaazul;
 		}
 
 	}
@@ -94,13 +114,9 @@ public class Activity_ListaProcessos extends Activity  {
 		TableLayout.LayoutParams tableParams = new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.FILL_PARENT);
 		TableRow.LayoutParams rowParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT,Gravity.RIGHT | Gravity.CENTER_VERTICAL);
 		tabela.setLayoutParams(tableParams);
-		CarregarProcessos();
-
-		for(int num=0; num<listaproc.size(); num++){	
-			TableRow tableRow1 = new TableRow(getApplicationContext());
+		for( int num=0; num<listaproc.size(); num++){	
+			final TableRow tableRow1 = new TableRow(getApplicationContext());
 			tableRow1.setLayoutParams(tableParams);
-
-
 			LinearLayout lin0 = new LinearLayout(getApplicationContext());
 			lin0.setOrientation(LinearLayout.VERTICAL);
 			String color = listcor[num];
@@ -115,8 +131,7 @@ public class Activity_ListaProcessos extends Activity  {
 
 			int prazo = listaproc.get(num).prazo;
 
-			int index = listaproc.get(num).datapublicacao.indexOf("/");
-			int pdias = Integer.parseInt(listaproc.get(num).datapublicacao.substring(0, index));
+			int pdias = listaproc.get(num).publicacaodia;
 
 			int qtddias = (pdias-mDay)+prazo;
 
@@ -169,14 +184,13 @@ public class Activity_ListaProcessos extends Activity  {
 
 			final CheckBox destaque = new CheckBox(getApplicationContext());
 			destaque.setButtonDrawable(R.drawable.custom_destaque);
-			
-			//TESTE
+
+
 			if(listaproc.get(num).destaque.equals("TRUE")){
 				destaque.setChecked(true);
 			}else{
 				destaque.setChecked(false);
 			}
-			//TESTE
 
 
 			TextView espaco2 = new TextView(getApplicationContext());
@@ -193,25 +207,45 @@ public class Activity_ListaProcessos extends Activity  {
 
 			tabela.addView(tableRow1);
 
-			final long id = listaproc.get(num)._id;
+			final long idr = listaproc.get(num)._id;
+			final int numr = num;
+			tableRow1.setOnClickListener(
+					new OnClickListener() {
+
+						@Override
+						public void onClick( View v ) {
+							SavePreferences("idprocesso", ""+idr);
+							Intent intent = new Intent(ctx,
+									Activity_VisProcesso.class);
+							startActivity(intent);
+							finish();
+
+						}					
+					}		
+
+					);
 
 
-
-			tableRow1.setOnClickListener( new OnClickListener() {
-				@Override
-				public void onClick( View v ) {
-					SavePreferences("idprocesso", ""+id);
-					Intent intent = new Intent(ctx,
-							Activity_VisProcesso.class);
-					startActivity(intent);
-
-				}
-			} );
-
-
-
+			id = listaproc.get(num)._id;
 
 			final int numi = num;
+
+
+			final GestureDetector myGesture = new GestureDetector(this, new MyOnGestureListener());
+
+			tableRow1.setOnTouchListener(new OnTouchListener(){
+
+				@Override
+				public boolean onTouch(View v, MotionEvent event) {
+					qualprocesso= numi;
+					flingObj = tableRow1;
+					return myGesture.onTouchEvent(event);
+
+				}});
+
+			tableRow1.setClickable(true);
+
+
 			destaque.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -226,7 +260,7 @@ public class Activity_ListaProcessos extends Activity  {
 					}
 
 				}
-				
+
 
 			});
 
@@ -237,6 +271,57 @@ public class Activity_ListaProcessos extends Activity  {
 
 	}	
 
+	class MyOnGestureListener implements OnGestureListener{
+		@Override
+		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+			if (Math.abs(e1.getY() - e2.getY()) > 200) {
+				return false;
+			}
+			//direita para esquerda
+			if (e1.getX() - e2.getX() > 200 && Math.abs(velocityX) > 200) {
+				flingObj.setBackgroundColor(Color.parseColor("#2da326"));
+				((LinearLayout) flingObj.getChildAt(0)).setBackgroundColor(Color.parseColor("#2da326"));
+				((LinearLayout) flingObj.getChildAt(2)).setBackgroundColor(Color.parseColor("#2da326"));
+				listaproc.get(qualprocesso).status = "CUMPRIDO";
+				listaproc.get(qualprocesso)._id = repositorio.atualizarProcesso(listaproc.get(qualprocesso));
+
+				Intent intent = new Intent(ctx,Activity_ListaProcessos.class);
+				startActivity(intent);
+				finish();
+			} 
+			//direita para esquerda
+			else if (e2.getX() - e1.getX() > 200 && Math.abs(velocityX) > 200) {
+				flingObj.setBackgroundColor(Color.parseColor("#8c0606"));
+				((LinearLayout) flingObj.getChildAt(0)).setBackgroundColor(Color.parseColor("#8c0606"));
+				((LinearLayout) flingObj.getChildAt(2)).setBackgroundColor(Color.parseColor("#8c0606"));
+				listaproc.get(qualprocesso).status = "NAOCUMPRIDO";
+				listaproc.get(qualprocesso)._id = repositorio.atualizarProcesso(listaproc.get(qualprocesso));
+				Intent intent = new Intent(ctx,Activity_ListaProcessos.class);
+				startActivity(intent);
+				finish();			
+			}
+			return true;
+
+		}
+
+		@Override
+		public void onLongPress(MotionEvent e) {
+		}
+		@Override
+		public boolean onScroll(MotionEvent e1, MotionEvent e2,
+				float distanceX, float distanceY) {return false;}
+		@Override
+		public void onShowPress(MotionEvent e) {}
+		@Override
+		public boolean onSingleTapUp(MotionEvent e) {
+			return false;
+		}
+		@Override
+		public boolean onDown(MotionEvent arg0) {
+			return false;
+		}
+
+	};
 
 	public void AdicionarProcesso(){
 
@@ -248,13 +333,12 @@ public class Activity_ListaProcessos extends Activity  {
 				Intent intent = new Intent(ctx,
 						Activity_CadProcesso.class);
 				startActivity(intent);
-
+				finish();
 			}
 		});
 	}
 
 	public void VisualizarUsuário(){
-
 		ImageButton btnUser = (ImageButton) findViewById(R.id.imageUser);
 		btnUser.setOnClickListener( new OnClickListener() {
 			@Override
@@ -263,7 +347,7 @@ public class Activity_ListaProcessos extends Activity  {
 				Intent intent = new Intent(ctx,
 						Activity_VisUsuario.class);
 				startActivity(intent);
-
+				finish();
 			}
 		});
 	}
@@ -275,7 +359,58 @@ public class Activity_ListaProcessos extends Activity  {
 		editor.commit();
 	}
 
+	// -----------------------------------------------------------------------------//
+	// NOTIFICACAO //
+	// -----------------------------------------------------------------------------//
+	public void notificarPrazo(){
+		SharedPreferences sharedPreferences = getSharedPreferences("CoopFam", Activity.MODE_PRIVATE);
+		String prazomin = sharedPreferences.getString("NOTIFPRAZO", "");
+		if(prazomin.equals("") || prazomin == null){
+			prazomin = "2 dias";
+		}
+		int minimoprazo =Integer.valueOf(prazomin.substring(0, 1));
+		int torf=0;
+		for( int num=0; num<listaproc.size(); num++){	
+			int prazo = listaproc.get(num).prazo;
 
+			int pdias = listaproc.get(num).publicacaodia;
+
+			int qtddias = (pdias-mDay)+prazo;
+			if(qtddias<=minimoprazo){ torf = 1; }
+		}
+		if(torf == 1){
+			// Texto com a chamada para a notificação (barra de status)
+			String tickerText = "O prazo para um processo chegou!";
+			// Detalhes da mensagem, quem enviou e o texto
+			CharSequence titulo = "Conta Prazos";
+			CharSequence mensagem = "Veja sua lista de processos, você tem prazos a cumprir! - Prazo Mínimo = "+prazomin+".";
+			// Exibe a notificação para abrir a RecebeuMensagemActivity
+			criarNotificacao(this, tickerText, titulo, mensagem, ExecutaNotificacao.class);
+		}
+	}
+	protected void criarNotificacao(Context context, CharSequence mensagemBarraStatus, CharSequence titulo,CharSequence mensagem, Class<?> activity) {
+
+		// Recupera o serviço do NotificationManager
+		NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+		Notification n = new Notification(R.drawable.logo, mensagemBarraStatus, System.currentTimeMillis());
+
+		// PendingIntent para executar a Activity se o usuário selecionar a
+		// notificação
+		PendingIntent p = PendingIntent.getActivity(this, 0, new Intent(this, activity), 0);
+
+		// Informações
+		n.setLatestEventInfo(this, titulo, mensagem, p);
+
+		// Precisa de permissão: <uses-permission
+		// android:name="android.permission.VIBRATE" />
+		// espera 100ms e vibra por 250ms, depois espera por 100 ms e vibra por
+		// 500ms.
+		n.vibrate = new long[] { 100, 250, 100, 500 };
+
+		// id (numero único) que identifica esta notificação
+		nm.notify(R.string.app_name, n);
+	}
 
 	// -----------------------------------------------------------------------------//
 	// MENU //
@@ -327,30 +462,27 @@ public class Activity_ListaProcessos extends Activity  {
 			startActivity(intent);
 			finish();
 			return true;
-		//Trecho que fizemos - OBS ANNA
-		case R.id.menu_acaodotouch:
+
+		case R.id.menu_rel:
 			intent = new Intent(ctx,
-					Activity_cnc.class);
+					RelatorioCumpridoNaoCumprido.class);
 
 			startActivity(intent);
 			finish();
 			return true;
-//END
-		
+
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
-
+	
 	// -----------------------------------------------------------------------------//
 	// FINALIZANDO //
 	// -----------------------------------------------------------------------------//
-
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		//repositorio.fechar();
+//		repositorio.fechar();
 	}
 
-
-}
+} 

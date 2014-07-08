@@ -24,7 +24,7 @@ public class Activity_VisProcesso extends Activity{
 
 		String id = sharedPreferences.getString("idprocesso", "");
 		processo = repositorio.buscarProcesso(Long.parseLong(id));
-
+		SavePreferences("idprocesso", id);
 		LoadProcesso();
 		Editar();
 	}
@@ -33,7 +33,7 @@ public class Activity_VisProcesso extends Activity{
 	private void LoadProcesso() {
 		((TextView) findViewById(R.id.textnumprocesso)).setText(((TextView) findViewById(R.id.textnumprocesso)).getText().toString()+": "+processo.numprocesso);
 		((TextView) findViewById(R.id.textvara)).setText(((TextView) findViewById(R.id.textvara)).getText().toString()+": "+processo.vara);
-		((TextView) findViewById(R.id.textdatapublicacao)).setText(((TextView) findViewById(R.id.textdatapublicacao)).getText().toString()+": "+processo.datapublicacao);
+		((TextView) findViewById(R.id.textdatapublicacao)).setText(((TextView) findViewById(R.id.textdatapublicacao)).getText().toString()+": "+new StringBuilder().append(processo.publicacaodia).append("/").append(processo.publicacaomes).append("/").append(processo.publicacaoano).append(" "));
 		((TextView) findViewById(R.id.textjornal)).setText(((TextView) findViewById(R.id.textjornal)).getText().toString()+": "+processo.jornal);
 		((TextView) findViewById(R.id.texttribunal)).setText(((TextView) findViewById(R.id.texttribunal)).getText().toString()+": "+processo.tribunal);
 		((TextView) findViewById(R.id.textcidade)).setText(((TextView) findViewById(R.id.textcidade)).getText().toString()+": "+processo.cidade);
