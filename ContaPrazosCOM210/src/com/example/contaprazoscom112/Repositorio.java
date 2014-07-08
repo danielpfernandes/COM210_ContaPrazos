@@ -32,11 +32,7 @@ public class Repositorio {
 	// Cria a tabela
 	private static final String[] SCRIPT_DATABASE_CREATE = new String[] {
 		"create table Usuario( _id integer primary key autoincrement, nomeusuario text, datadenascimento text, cpf text, endereco text, celular text, email text, numeroOAB text, apelido text, senha text);", 
-<<<<<<< HEAD
 		"create table Processo ( _id integer primary key autoincrement, numprocesso text, vara text, publicacaodia int, publicacaomes int, publicacaoano int, jornal text, tribunal text, cidade text, expediente text, titulo text, autor text, reu text, despacho text, prazo int, advogado  text, destaque text, status text);",
-=======
-		"create table Processo ( _id integer primary key autoincrement, numprocesso text, vara text, datapublicacao text, jornal text, tribunal text, cidade text, expediente text, titulo text, autor text, reu text, despacho text, prazo text, advogado  text, destaque text, status text);",
->>>>>>> master
 	}
 	;
 
@@ -222,7 +218,6 @@ public class Repositorio {
 			objeto._id = c.getLong(0);
 			objeto.numprocesso = c.getString(1);
 			objeto.vara = c.getString(2);
-<<<<<<< HEAD
 			objeto.publicacaodia = c.getInt(3);
 			objeto.publicacaomes = c.getInt(4);
 			objeto.publicacaoano = c.getInt(5);
@@ -238,21 +233,6 @@ public class Repositorio {
 			objeto.advogado= c.getString(15);
 			objeto.destaque = c.getString(16);
 			objeto.status = c.getString(17);
-=======
-			objeto.datapublicacao = c.getString(3);
-			objeto.jornal = c.getString(4);
-			objeto.tribunal = c.getString(5);
-			objeto.cidade = c.getString(6);
-			objeto.expediente = c.getString(7);
-			objeto.titulo = c.getString(8);
-			objeto.autor = c.getString(9);
-			objeto.reu= c.getString(10);
-			objeto.despacho= c.getString(11);
-			objeto.prazo = c.getString(12);
-			objeto.advogado= c.getString(13);
-			objeto.destaque = c.getString(14);
-			objeto.status = c.getString(15);
->>>>>>> master
 
 			c.close();
 			return objeto;
@@ -285,7 +265,6 @@ public class Repositorio {
 					objeto._id = c.getLong(0);
 					objeto.numprocesso = c.getString(1);
 					objeto.vara = c.getString(2);
-<<<<<<< HEAD
 					objeto.publicacaodia = c.getInt(3);
 					objeto.publicacaomes = c.getInt(4);
 					objeto.publicacaoano = c.getInt(5);
@@ -301,21 +280,6 @@ public class Repositorio {
 					objeto.advogado= c.getString(15);
 					objeto.destaque = c.getString(16);
 					objeto.status = c.getString(17);
-=======
-					objeto.datapublicacao = c.getString(3);
-					objeto.jornal = c.getString(4);
-					objeto.tribunal = c.getString(5);
-					objeto.cidade = c.getString(6);
-					objeto.expediente = c.getString(7);
-					objeto.titulo = c.getString(8);
-					objeto.autor = c.getString(9);
-					objeto.reu= c.getString(10);
-					objeto.despacho= c.getString(11);
-					objeto.prazo = c.getString(12);
-					objeto.advogado= c.getString(13);
-					objeto.destaque = c.getString(14);
-					objeto.status = c.getString(15);
->>>>>>> master
 
 				} while (c.moveToNext());
 			}		
@@ -349,7 +313,6 @@ public class Repositorio {
 					objeto._id = c.getLong(0);
 					objeto.numprocesso = c.getString(1);
 					objeto.vara = c.getString(2);
-<<<<<<< HEAD
 					objeto.publicacaodia = c.getInt(3);
 					objeto.publicacaomes = c.getInt(4);
 					objeto.publicacaoano = c.getInt(5);
@@ -365,21 +328,6 @@ public class Repositorio {
 					objeto.advogado= c.getString(15);
 					objeto.destaque = c.getString(16);
 					objeto.status = c.getString(17);
-=======
-					objeto.datapublicacao = c.getString(3);
-					objeto.jornal = c.getString(4);
-					objeto.tribunal = c.getString(5);
-					objeto.cidade = c.getString(6);
-					objeto.expediente = c.getString(7);
-					objeto.titulo = c.getString(8);
-					objeto.autor = c.getString(9);
-					objeto.reu= c.getString(10);
-					objeto.despacho= c.getString(11);
-					objeto.prazo = c.getString(12);
-					objeto.advogado= c.getString(13);
-					objeto.destaque = c.getString(14);
-					objeto.status = c.getString(15);
->>>>>>> master
 
 				} while (c.moveToNext());
 			}		
@@ -469,11 +417,7 @@ public class Repositorio {
 
 	public void apagarProcesso(){
 		db.execSQL("DROP TABLE IF EXISTS Processo;");
-<<<<<<< HEAD
 		db.execSQL("create table Processo ( _id integer primary key autoincrement, numprocesso text, vara text, taxa text, publicacaodia int, publicacaomes int, publicacaoano int, jornal text, tribunal text, cidade text, expediente text, titulo text, autor text, reu text, despacho text, prazo int, advogado  text, destaque text, status text);"
-=======
-		db.execSQL("create table Processo ( _id integer primary key autoincrement, numprocesso text, vara text, taxa text, datapublicacao text, jornal text, tribunal text, cidade text, expediente text, titulo text, autor text, reu text, despacho text, prazo text, advogado  text, destaque text, usuario text);"
->>>>>>> master
 				);
 	}
 

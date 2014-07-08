@@ -197,16 +197,16 @@ public class Activity_cnc extends Activity implements OnGestureListener{
 			faltam.setGravity(Gravity.CENTER);
 
 
-			int prazo = Integer.parseInt(listaproc.get(num).prazo);
+//			int prazo = Integer.parseInt(listaproc.get(num).prazo);
 
-			int index = listaproc.get(num).datapublicacao.indexOf("/");
-			int pdias = Integer.parseInt(listaproc.get(num).datapublicacao.substring(0, index));
+//			int index = listaproc.get(num).datapublicacao.indexOf("/");
+//			int pdias = Integer.parseInt(listaproc.get(num).datapublicacao.substring(0, index));
 
-			int qtddias = (pdias-mDay)+prazo;
+//			int qtddias = (pdias-mDay)+prazo;
 
 
 			TextView qtd = new TextView(getApplicationContext());
-			qtd.setText(String.valueOf(qtddias));
+//			qtd.setText(String.valueOf(qtddias));
 
 			qtd.setTextColor(Color.BLACK);
 			qtd.setTextSize(18);
@@ -410,13 +410,13 @@ public class Activity_cnc extends Activity implements OnGestureListener{
 			finish();
 			return true;
 			//Trecho que fizemos - OBS ANNA
-		case R.id.menu_acaodotouch:
+		/*case R.id.menu_acaodotouch:
 			intent = new Intent(ctx,
 					Activity_cnc.class);
 
 			startActivity(intent);
 			finish();
-			return true;
+			return true;*/
 			//END
 
 		default:

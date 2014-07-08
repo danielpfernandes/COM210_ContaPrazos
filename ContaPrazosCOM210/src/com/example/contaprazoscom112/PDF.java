@@ -188,13 +188,13 @@ public class PDF  extends Activity {
 			finish();
 			return true;
 			
-		case R.id.menu_pdf:
+/*		case R.id.menu_pdf:
 			intent = new Intent(ctx,
 					PDF.class);
 
 			startActivity(intent);
 			finish();
-			return true;
+			return true;*/
 		default:
 			return super.onOptionsItemSelected(item);
 		}

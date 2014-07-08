@@ -54,7 +54,6 @@
             android:layout_margin="0dp"
             android:orientation="horizontal" >
 
-<<<<<<< HEAD
             
                 <TableLayout
                     android:id="@+id/tabela_processo"
@@ -63,15 +62,6 @@
                     android:layout_gravity="center_horizontal" >
                 </TableLayout>
             
-=======
-            <TableLayout
-                android:id="@+id/tabela_processo"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_horizontal" >
-            </TableLayout>
-
->>>>>>> master
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
