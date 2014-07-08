@@ -31,7 +31,7 @@ public class Repositorio {
 	// Cria a tabela
 	private static final String[] SCRIPT_DATABASE_CREATE = new String[] {
 		"create table Usuario( _id integer primary key autoincrement, nomeusuario text, datadenascimento text, cpf text, endereco text, celular text, email text, numeroOAB text, apelido text, senha text);", 
-		"create table Processo ( _id integer primary key autoincrement, numprocesso text, vara text, datapublicacao text, jornal text, tribunal text, cidade text, expediente text, titulo text, autor text, reu text, despacho text, prazo text, advogado  text, destaque text);",
+		"create table Processo ( _id integer primary key autoincrement, numprocesso text, vara text, datapublicacao text, jornal text, tribunal text, cidade text, expediente text, titulo text, autor text, reu text, despacho text, prazo text, advogado  text, destaque text, status text);",
 	}
 	;
 
@@ -108,6 +108,7 @@ public class Repositorio {
 		values.put(Processos.PRAZO, objeto.prazo);
 		values.put(Processos.ADVOGADO    , objeto.advogado);
 		values.put(Processos.DESTAQUE  , objeto.destaque);
+		values.put(Processos.STATUS  , objeto.status);
 
 		long _id =inserirProcesso(values);
 
@@ -166,6 +167,7 @@ public class Repositorio {
 		values.put(Processos.PRAZO, objeto.prazo);
 		values.put(Processos.ADVOGADO    , objeto.advogado);
 		values.put(Processos.DESTAQUE    , objeto.destaque);
+		values.put(Processos.STATUS    , objeto.status);
 
 
 		String _id = String.valueOf(objeto._id);
@@ -223,8 +225,8 @@ public class Repositorio {
 			objeto.prazo = c.getString(12);
 			objeto.advogado= c.getString(13);
 			objeto.destaque = c.getString(14);
+			objeto.status = c.getString(15);
 
-			Log.e("ATUALIZOU PROCESSO", "te");
 			c.close();
 			return objeto;
 		}
@@ -269,10 +271,11 @@ public class Repositorio {
 					objeto.prazo = c.getString(12);
 					objeto.advogado= c.getString(13);
 					objeto.destaque = c.getString(14);
+					objeto.status = c.getString(15);
 
 				} while (c.moveToNext());
 			}		
-			c.close();		
+			//c.close();		
 
 		} catch (SQLException e) {
 			Log.e(CATEGORIA, "Erro ao buscar o objeto: " + e.toString());
@@ -314,10 +317,11 @@ public class Repositorio {
 					objeto.prazo = c.getString(12);
 					objeto.advogado= c.getString(13);
 					objeto.destaque = c.getString(14);
+					objeto.status = c.getString(15);
 
 				} while (c.moveToNext());
 			}		
-			c.close();		
+			//c.close();		
 
 		} catch (SQLException e) {
 			Log.e(CATEGORIA, "Erro ao buscar o objeto: " + e.toString());
@@ -339,7 +343,7 @@ public class Repositorio {
 
 	public void apagarProcesso(){
 		db.execSQL("DROP TABLE IF EXISTS Processo;");
-		db.execSQL("create table Processo ( _id integer primary key autoincrement, numprocesso text, vara text, taxa text, datapublicacao text, jornal text, tribunal text, cidade text, expediente text, titulo text, autor text, reu text, despacho text, prazo text, advogado  text, destaque text);"
+		db.execSQL("create table Processo ( _id integer primary key autoincrement, numprocesso text, vara text, taxa text, datapublicacao text, jornal text, tribunal text, cidade text, expediente text, titulo text, autor text, reu text, despacho text, prazo text, advogado  text, destaque text, usuario text);"
 				);
 	}
 

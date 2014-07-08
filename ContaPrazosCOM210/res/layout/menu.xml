@@ -15,6 +15,10 @@
  <item
         android:id="@+id/menu_sobre"
         android:title="Sobre"/>
+ <!-- //Trecho que fizemos - OBS ANNA -->
+ <item
+        android:id="@+id/menu_acaodotouch"
+        android:title="Touch"/>
     
 
 </menu>
