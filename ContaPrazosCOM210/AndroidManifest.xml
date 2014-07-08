@@ -67,8 +67,25 @@
             android:name="com.example.contaprazoscom112.Activity_Configuracoes"
             android:screenOrientation="portrait" >
         </activity>
+<<<<<<< HEAD
         <uses-library android:name="android.test.runner" />
         
+=======
+        
+        
+        <activity
+<<<<<<< HEAD
+            android:name="com.example.contaprazoscom112.Activity_cnc"
+            android:screenOrientation="portrait" >
+        </activity>
+        
+        
+=======
+            android:name="com.example.contaprazoscom112.PDF"
+            android:screenOrientation="portrait" >
+        </activity>
+>>>>>>> fd676f5a82a39f7a705c24abb08e1d2cda3c973b
+>>>>>>> master
     </application>
 
 </manifest>

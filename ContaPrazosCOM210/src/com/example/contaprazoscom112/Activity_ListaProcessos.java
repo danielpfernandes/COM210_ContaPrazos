@@ -319,7 +319,6 @@ public class Activity_ListaProcessos extends Activity  {
 		case R.id.menu_sobre:
 			intent = new Intent(ctx,
 					Activity_Sobre.class);
-
 			startActivity(intent);
 			finish();
 			return true;
@@ -331,6 +330,26 @@ public class Activity_ListaProcessos extends Activity  {
 			startActivity(intent);
 			finish();
 			return true;
+<<<<<<< HEAD
+		//Trecho que fizemos - OBS ANNA
+		case R.id.menu_acaodotouch:
+			intent = new Intent(ctx,
+					Activity_cnc.class);
+=======
+			
+		case R.id.menu_pdf:
+			intent = new Intent(ctx,
+					PDF.class);
+>>>>>>> fd676f5a82a39f7a705c24abb08e1d2cda3c973b
+
+			startActivity(intent);
+			finish();
+			return true;
+<<<<<<< HEAD
+//END
+		
+=======
+>>>>>>> fd676f5a82a39f7a705c24abb08e1d2cda3c973b
 		default:
 			return super.onOptionsItemSelected(item);
 		}
