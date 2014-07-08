@@ -1,6 +1,8 @@
 package com.example.contaprazoscom112;
 
 
+import com.example.contaprazoscom112.R;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;

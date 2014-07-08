@@ -2,7 +2,11 @@ package com.example.contaprazoscom112;
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD
 import com.example.contaprazoscom112.R.color;
+=======
+import com.example.contaprazoscom112.R;
+>>>>>>> master
 
 import android.app.Activity;
 import android.app.Notification;
@@ -462,15 +466,37 @@ public class Activity_ListaProcessos extends Activity {
 			startActivity(intent);
 			finish();
 			return true;
+<<<<<<< HEAD
 
 		case R.id.menu_rel:
 			intent = new Intent(ctx,
 					RelatorioCumpridoNaoCumprido.class);
+=======
+<<<<<<< HEAD
+		//Trecho que fizemos - OBS ANNA
+		case R.id.menu_acaodotouch:
+			intent = new Intent(ctx,
+					Activity_cnc.class);
+=======
+			
+		case R.id.menu_pdf:
+			intent = new Intent(ctx,
+					PDF.class);
+>>>>>>> fd676f5a82a39f7a705c24abb08e1d2cda3c973b
+>>>>>>> master
 
 			startActivity(intent);
 			finish();
 			return true;
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+//END
+		
+=======
+>>>>>>> fd676f5a82a39f7a705c24abb08e1d2cda3c973b
+>>>>>>> master
 		default:
 			return super.onOptionsItemSelected(item);
 		}

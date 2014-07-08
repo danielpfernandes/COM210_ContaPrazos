@@ -2,6 +2,8 @@ package com.example.contaprazoscom112;
 
 import java.util.Calendar;
 
+import com.example.contaprazoscom112.R;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;

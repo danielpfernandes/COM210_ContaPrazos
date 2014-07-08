@@ -20,5 +20,19 @@
     <item
         android:id="@+id/menu_sobre"
         android:title="Sobre"/>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+ <!-- //Trecho que fizemos - OBS ANNA -->
+ <item
+        android:id="@+id/menu_acaodotouch"
+        android:title="Touch"/>
+=======
+ <item
+        android:id="@+id/menu_pdf"
+        android:title="PDF"/>
+>>>>>>> fd676f5a82a39f7a705c24abb08e1d2cda3c973b
+    
+>>>>>>> master
 
 </menu>

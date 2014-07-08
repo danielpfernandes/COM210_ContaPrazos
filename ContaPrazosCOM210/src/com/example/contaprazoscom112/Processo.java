@@ -10,7 +10,11 @@ import android.provider.BaseColumns;
 //_ID NUMPROCESSO VARA DATAPUBLICACAO JORNAL TRIBUNAL CIDADE EXPEDIENTE TITULO AUTOR REU DESPACHO PRAZO ADVOGADO DESTAQUE STATUS
 
 public class Processo {
+<<<<<<< HEAD
 	public static String[] colunas = new String[] { Processos._ID, Processos.NUMPROCESSO, Processos.VARA, Processos.PUBLICACAODIA, Processos.PUBLICACAOMES, Processos.PUBLICACAOANO, Processos.JORNAL, Processos.TRIBUNAL, Processos.CIDADE, Processos.EXPEDIENTE, Processos.TITULO, Processos.AUTOR, Processos.REU, Processos.DESPACHO, Processos.PRAZO, Processos.ADVOGADO, Processos.DESTAQUE, Processos.STATUS};
+=======
+	public static String[] colunas = new String[] { Processos._ID, Processos.NUMPROCESSO, Processos.VARA, Processos.DATAPUBLICACAO, Processos.JORNAL, Processos.TRIBUNAL, Processos.CIDADE, Processos.EXPEDIENTE, Processos.TITULO, Processos.AUTOR, Processos.REU, Processos.DESPACHO, Processos.PRAZO, Processos.ADVOGADO, Processos.DESTAQUE, Processos.STATUS};
+>>>>>>> master
 	
 	//Pacote do Content Provider. Precisa ser único.
 	public static final String AUTHORITY = "nome.do.pacote.provider.Processo";
@@ -37,7 +41,11 @@ public class Processo {
 	public Processo() {
 	}
 
+<<<<<<< HEAD
 	public Processo(String numprocesso,String vara , int  publicacaodia, int  publicacaomes, int  publicacaoano , String jornal, String tribunal, String cidade, String expediente, String titulo, String autor, String reu , String despacho, int prazo, String advogado, String destaque, String status) 
+=======
+	public Processo(String numprocesso,String vara , String  datapublicacao , String jornal, String tribunal, String cidade, String expediente, String titulo, String autor, String reu , String despacho, String prazo, String advogado, String destaque, String status) 
+>>>>>>> master
 	{
 		super();
 		this.numprocesso = numprocesso;
@@ -59,7 +67,11 @@ public class Processo {
 		this.status = status;
 	}
 
+<<<<<<< HEAD
 	public Processo(long _id, String numprocesso,String vara , int  publicacaodia, int  publicacaomes, int  publicacaoano , String jornal, String tribunal, String cidade, String expediente, String titulo, String autor, String reu , String despacho, int prazo, String advogado, String destaque, String status) 
+=======
+	public Processo(long _id, String numprocesso,String vara , String  datapublicacao , String jornal, String tribunal, String cidade, String expediente, String titulo, String autor, String reu , String despacho, String prazo,String advogado, String destaque, String status) 
+>>>>>>> master
 	{
 		super();
 		this._id = _id;
@@ -80,7 +92,12 @@ public class Processo {
 		this.advogado = advogado;
 		this.destaque = destaque;
 		this.status = status;
+<<<<<<< HEAD
 		}
+=======
+			
+	}
+>>>>>>> master
 	
 	
 	public static final class Processos implements BaseColumns {

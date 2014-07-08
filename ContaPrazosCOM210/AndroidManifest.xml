@@ -16,12 +16,14 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <instrumentation android:name="android.test.InstrumentationTestRunner" android:targetPackage="com.example.contaprazoscom112"></instrumentation>
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
-        android:label="Conta Prazos"
+        android:label="Conta Prazos"        
         android:theme="@style/AppTheme" >
+        
         <activity
             android:name="com.example.contaprazoscom112.Splash"
             android:label="@string/app_name" >
@@ -63,6 +65,7 @@
             android:name="com.example.contaprazoscom112.Activity_Configuracoes"
             android:screenOrientation="portrait" >
         </activity>
+<<<<<<< HEAD
         <activity
             android:name="com.example.contaprazoscom112.RelatorioCumpridoNaoCumprido"
             android:screenOrientation="portrait" >
@@ -71,6 +74,27 @@
             android:name="com.example.contaprazoscom112.CriaNotificacao"
             android:screenOrientation="portrait" >
         </activity>
+=======
+<<<<<<< HEAD
+        <uses-library android:name="android.test.runner" />
+        
+=======
+        
+        
+        <activity
+<<<<<<< HEAD
+            android:name="com.example.contaprazoscom112.Activity_cnc"
+            android:screenOrientation="portrait" >
+        </activity>
+        
+        
+=======
+            android:name="com.example.contaprazoscom112.PDF"
+            android:screenOrientation="portrait" >
+        </activity>
+>>>>>>> fd676f5a82a39f7a705c24abb08e1d2cda3c973b
+>>>>>>> master
+>>>>>>> master
     </application>
 
 </manifest>
